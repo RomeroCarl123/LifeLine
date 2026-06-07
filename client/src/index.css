@@ -1,0 +1,535 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-ink: #172033;
+  --c-ink-soft: #b42336;
+  --c-muted: #5d697c;
+  --c-primary: #d92d3f;
+  --c-primary-strong: #a71930;
+  --c-primary-soft: #fff0f2;
+  --c-bg: #f7f9fc;
+  --c-bg-soft: #eef4f8;
+  --c-panel: rgba(255, 255, 255, 0.98);
+  --c-panel-border: #dbe3ec;
+  --c-elevated: #ffffff;
+  --c-shadow: rgba(20, 31, 50, 0.14);
+  --c-success: #087f5b;
+  --c-warning: #b45309;
+  --c-info: #2563eb;
+  --shadow-lg: 0 20px 48px -34px rgba(20, 31, 50, 0.34);
+}
+
+html {
+  background: var(--c-bg);
+}
+
+body {
+  background: linear-gradient(180deg, #ffffff 0%, var(--c-bg) 38%, #f2f6fa 100%);
+  color: var(--c-ink);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Sora", "Manrope", sans-serif;
+  letter-spacing: 0;
+}
+
+a,
+button,
+input,
+select {
+  min-height: 2.75rem;
+}
+
+button,
+a {
+  outline-offset: 3px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(217, 45, 63, 0.2);
+}
+
+.app-shell-width {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.app-page-width {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .app-shell-width,
+  .app-page-width {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-shell-width,
+  .app-page-width {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .app-shell-width,
+  .app-page-width {
+    padding-left: 2.75rem;
+    padding-right: 2.75rem;
+  }
+}
+
+.android-screen {
+  position: relative;
+}
+
+.android-screen::before {
+  content: none;
+}
+
+.site-nav,
+.android-topbar {
+  border-bottom: 1px solid var(--c-panel-border);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+}
+
+.android-brand-mark {
+  background: var(--c-primary);
+  box-shadow: 0 12px 28px -20px rgba(217, 45, 63, 0.5);
+}
+
+.hero-surface,
+.android-hero,
+.dashboard-hero,
+.auth-shell,
+.panel,
+.section-card,
+.dashboard-section {
+  border: 1px solid var(--c-panel-border);
+  border-radius: 0.75rem;
+  background: var(--c-panel);
+  box-shadow: 0 16px 38px -30px var(--c-shadow);
+}
+
+.hero-highlight,
+.android-hero-tonal {
+  background: linear-gradient(135deg, #1f2937 0%, #9f1239 100%);
+  color: #ffffff;
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-glow {
+  display: none;
+}
+
+.hero-glow-left {
+  left: -2rem;
+  top: 5rem;
+  height: 12rem;
+  width: 12rem;
+  background: rgba(255, 212, 190, 0.7);
+}
+
+.hero-glow-right {
+  right: 0;
+  top: 0;
+  height: 14rem;
+  width: 14rem;
+  background: rgba(243, 179, 163, 0.62);
+}
+
+.hero-glow-bottom {
+  bottom: -2rem;
+  right: 5rem;
+  height: 10rem;
+  width: 10rem;
+  background: rgba(255, 226, 210, 0.75);
+}
+
+.metric-card,
+.dashboard-stat,
+.android-stat-card {
+  border: 1px solid var(--c-panel-border);
+  border-radius: 0.75rem;
+  background: #ffffff;
+  box-shadow: 0 14px 30px -24px var(--c-shadow);
+}
+
+.soft-panel,
+.android-tonal-surface {
+  border: 1px solid var(--c-panel-border);
+  background: var(--c-bg-soft);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.list-card,
+.android-list-item {
+  border: 1px solid var(--c-panel-border);
+  border-radius: 0.75rem;
+  background: var(--c-elevated);
+  box-shadow: 0 12px 24px -20px var(--c-shadow);
+}
+
+.dashboard-section-header {
+  border-bottom: 1px solid var(--c-panel-border);
+  background: #f8fafc;
+}
+
+.dashboard-filter-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-filter-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+  }
+}
+
+.auth-input {
+  width: 100%;
+  border-radius: 0.65rem;
+  border: 1px solid var(--c-panel-border);
+  background-color: #ffffff;
+  padding: 0.86rem 0.95rem;
+  color: var(--c-ink);
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.auth-input:focus {
+  border-color: rgba(217, 45, 63, 0.46);
+  box-shadow: 0 0 0 4px rgba(217, 45, 63, 0.12);
+  background-color: #fff;
+}
+
+.auth-button {
+  border-radius: 0.65rem;
+  background: var(--c-primary);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.95rem 1.1rem;
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.auth-button:disabled,
+.btn-secondary:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+  transform: none;
+  filter: none;
+}
+
+.auth-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 32px -22px rgba(217, 45, 63, 0.48);
+  background: var(--c-primary-strong);
+}
+
+.auth-enter-right {
+  animation: auth-slide-right 420ms cubic-bezier(0.21, 0.8, 0.28, 1);
+}
+
+.auth-enter-left {
+  animation: auth-slide-left 420ms cubic-bezier(0.21, 0.8, 0.28, 1);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.chip,
+.android-chip {
+  border: 1px solid var(--c-panel-border);
+  border-radius: 9999px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--c-ink-soft);
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.page-stack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.btn-secondary {
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid var(--c-panel-border);
+  color: var(--c-ink);
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+  transition: transform 160ms ease, filter 160ms ease, background-color 160ms ease;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  background: #fff;
+  filter: brightness(1.02);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.status-pill-normal {
+  background: #eef6ff;
+  color: #1d4ed8;
+}
+
+.status-pill-urgent {
+  background: #fff7ed;
+  color: #b45309;
+}
+
+.status-pill-critical {
+  background: #fff0f2;
+  color: #b42336;
+}
+
+.animate-page-in {
+  animation: page-in 360ms cubic-bezier(0.21, 0.8, 0.28, 1) both;
+}
+
+.animate-card-in {
+  animation: card-in 320ms cubic-bezier(0.21, 0.8, 0.28, 1) both;
+}
+
+.animate-dropdown {
+  transform-origin: top right;
+  animation: dropdown-in 180ms cubic-bezier(0.21, 0.8, 0.28, 1) both;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 9999px;
+  animation: spin 760ms linear infinite;
+}
+
+.skeleton-line {
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: #e4eaf1;
+}
+
+.skeleton-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, #ffffff9e, transparent);
+  animation: shimmer 1.35s ease-in-out infinite;
+}
+
+.pulse-dot {
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
+
+.location-map-shell {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0) 22%),
+    #f4f8fb;
+}
+
+.location-map-canvas {
+  filter: saturate(0.72) contrast(0.96) brightness(1.02);
+}
+
+.location-map-canvas .leaflet-pane.leaflet-tile-pane {
+  filter: grayscale(0.22) saturate(0.75) contrast(0.94) brightness(1.03);
+}
+
+.location-map-canvas .leaflet-control-container {
+  display: none;
+}
+
+.location-map-canvas .leaflet-popup-content-wrapper {
+  border-radius: 16px;
+  box-shadow: 0 18px 38px -30px rgba(11, 31, 58, 0.65);
+  padding: 0.15rem;
+}
+
+.location-map-canvas .leaflet-popup-content {
+  margin: 0;
+  padding: 0.8rem 0.95rem;
+  color: var(--c-ink);
+  font-family: inherit;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.location-map-canvas .leaflet-popup-tip {
+  box-shadow: none;
+}
+
+.location-map-overlay {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0) 24%),
+    radial-gradient(circle at center, rgba(255, 255, 255, 0) 52%, rgba(255, 245, 240, 0.42) 100%);
+}
+
+.location-map-marker {
+  background: transparent;
+  border: 0;
+}
+
+.location-map-marker__dot {
+  display: block;
+  width: 26px;
+  height: 26px;
+  border-radius: 9999px;
+  border: 7px solid rgba(255, 255, 255, 0.98);
+  background: var(--c-primary);
+  box-shadow:
+    0 0 0 7px rgba(234, 95, 73, 0.18),
+    0 18px 32px -18px rgba(200, 72, 70, 0.42);
+}
+
+.nav-link {
+  border-radius: 0.65rem;
+  color: var(--c-muted);
+  font-weight: 800;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.nav-link:hover,
+.nav-link-active {
+  background: var(--c-bg-soft);
+  color: var(--c-ink);
+}
+
+.dashboard-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1180px) {
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    align-items: start;
+  }
+}
+
+@keyframes auth-slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(26px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes auth-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(-26px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
