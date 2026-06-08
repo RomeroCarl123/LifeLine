@@ -3,24 +3,35 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { api, Role } from "../api";
 
 type Props = { onAuth: (token: string, user: any) => void };
+
 const bloodTypes = ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"];
+
+type FieldProps = {
+  label: string;
+  hint?: React.ReactNode;
+  children: React.ReactNode;
+};
 
 export default function Register({ onAuth }: Props) {
   const [role, setRole] = useState<Role>("donor");
-  const [form, setForm] = useState({ name: "", email: "", password: "", bloodType: "O+", location: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    bloodType: "O+",
+    location: "",
+  });
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
-  const entryAnimation = location.state?.from === "login" ? "auth-enter-right" : "auth-enter-left";
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const requestedRole = params.get("role");
-    if (requestedRole === "donor" || requestedRole === "requester") {
-      setRole(requestedRole);
-    }
+    const requested = params.get("role");
+    if (requested === "donor" || requested === "requester") setRole(requested);
   }, [location.search]);
 
   const submit = async (e: FormEvent) => {
@@ -34,15 +45,18 @@ export default function Register({ onAuth }: Props) {
         password: form.password,
         role,
       };
+
       if (role === "donor") {
         payload.bloodType = form.bloodType;
         payload.location = form.location;
         payload.availability = true;
       }
+
       const data = await api<{ token: string; user: any }>("/auth/register", {
         method: "POST",
         body: JSON.stringify(payload),
       });
+
       onAuth(data.token, data.user);
       navigate("/dashboard");
     } catch (err) {
@@ -53,189 +67,303 @@ export default function Register({ onAuth }: Props) {
   };
 
   return (
-    <section className="flex min-h-screen items-center justify-center px-4 py-6 sm:px-6 lg:py-10">
-      <div className={`auth-shell ${entryAnimation} w-full overflow-hidden rounded-[2rem]`}>
-        <div className="grid lg:grid-cols-[1.04fr_0.96fr]">
-          <aside className="hero-highlight hidden p-8 lg:flex lg:min-h-[640px] lg:flex-col lg:justify-between">
-            <div>
-              <div className="inline-flex items-center gap-3 rounded-full border border-white/12 bg-white/8 px-4 py-2">
-                <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-sm font-black text-[var(--c-primary-strong)]">
-                  L
-                </span>
-                <span className="text-sm font-bold">LifeLine Onboarding</span>
-              </div>
-              <h2 className="mt-10 max-w-md text-4xl font-black leading-tight">
-                Create a profile in a cleaner, role-based system.
-              </h2>
-              <p className="mt-4 max-w-md text-sm leading-6 text-white/72">
-                Join as a donor or requester and start from a dashboard that
-                matches the work you need to do.
+    <div
+      className="min-h-screen bg-[var(--ll-bg,#f8fafc)] text-[var(--ll-ink,#0f172a)] ll-animate-in"
+      style={{ fontFamily: "Urbanist, system-ui, sans-serif" }}
+    >
+      <div className="mx-auto grid min-h-screen max-w-[1400px] grid-cols-1 lg:grid-cols-[1fr_1.05fr]">
+        {/* LEFT — form */}
+        <main className="flex items-center justify-center px-5 py-12 sm:px-10 lg:order-1">
+          <div className="w-full max-w-md">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--ll-muted,#64748b)] hover:text-[var(--ll-ink,#0f172a)]"
+            >
+              ← Back to home
+            </Link>
+
+            <div className="mt-6">
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--ll-accent,#ef4444)]">
+                Create account
               </p>
-            </div>
-
-            <div className="grid gap-3">
-              <div className="rounded-[1.25rem] border border-white/12 bg-white/10 p-5">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/72">
-                  Setup Path
-                </p>
-                <div className="mt-4 space-y-3">
-                  <div className="flex items-center gap-3">
-                    <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-sm font-black text-[var(--c-primary-strong)]">
-                      1
-                    </span>
-                    <span className="text-sm font-semibold">Choose your role</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="grid h-8 w-8 place-items-center rounded-full bg-white/88 text-sm font-black text-[var(--c-ink)]">
-                      2
-                    </span>
-                    <span className="text-sm font-semibold">Add contact details</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="grid h-8 w-8 place-items-center rounded-full bg-white/12 text-sm font-black text-white">
-                      3
-                    </span>
-                    <span className="text-sm font-semibold">Open your dashboard</span>
-                  </div>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-[1.25rem] bg-white/88 p-4 text-[var(--c-ink)]">
-                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--c-ink-soft)]">
-                    Coverage
-                  </p>
-                  <p className="mt-2 text-2xl font-black">24/7</p>
-                </div>
-                <div className="rounded-[1.25rem] bg-white/12 p-4 text-white">
-                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/75">
-                    Matching
-                  </p>
-                  <p className="mt-2 text-2xl font-black">Live</p>
-                </div>
-              </div>
-            </div>
-          </aside>
-
-          <form onSubmit={submit} className="p-6 sm:p-10 lg:p-12">
-            <div className="mx-auto max-w-md">
-              <Link
-                to="/"
-                className="mb-8 inline-flex items-center rounded-[1rem] border border-[var(--c-panel-border)] bg-white px-4 py-2.5 text-sm font-bold text-[var(--c-ink)] transition hover:bg-[var(--c-bg-soft)]"
+              <h2
+                className="mt-3 text-4xl font-black leading-tight"
+                style={{ fontFamily: "Epilogue, sans-serif" }}
               >
-                Back to Home
-              </Link>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--c-ink-soft)]">
-                Create Account
+                Start your LifeLine profile.
+              </h2>
+              <p className="mt-2 text-sm text-[var(--ll-muted,#64748b)]">
+                Pick a role so we open the dashboard with the right tools from
+                minute one.
               </p>
-              <h1 className="mt-3 text-3xl font-black text-[var(--c-ink)] sm:text-4xl">
-                Start your LifeLine profile
-              </h1>
-              <p className="mt-3 text-sm leading-7 text-[var(--c-muted)]">
-                Tell us who you are joining as so the dashboard opens with the
-                right tools.
-              </p>
+            </div>
 
-              <div className="soft-panel mt-7 grid grid-cols-2 gap-2 rounded-[1.25rem] p-1.5">
-                {(["donor", "requester"] as Role[]).map((nextRole) => (
+            {/* Role toggle */}
+            <div className="mt-6 grid grid-cols-2 gap-2 rounded-xl border border-[var(--ll-line,#e2e8f0)] bg-white p-1.5">
+              {(["donor", "requester"] as Role[]).map((r) => (
+                <button
+                  key={r}
+                  type="button"
+                  onClick={() => setRole(r)}
+                  className={`rounded-lg px-3 py-2.5 text-xs font-bold uppercase tracking-[0.14em] transition ${
+                    role === r
+                      ? "bg-[var(--ll-ink,#0f172a)] text-white shadow-sm"
+                      : "text-[var(--ll-muted,#64748b)] hover:bg-white"
+                  }`}
+                >
+                  {r === "donor" ? "I'm a donor" : "I need blood"}
+                </button>
+              ))}
+            </div>
+
+            <form onSubmit={submit} className="mt-6 space-y-4">
+              <Field label="Full name">
+                <input
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  required
+                  minLength={2}
+                  maxLength={80}
+                  pattern="[A-Za-z][A-Za-z\s'.-]*"
+                  className="auth-input"
+                  placeholder="Jane Doe"
+                />
+              </Field>
+
+              <Field label="Email">
+                <input
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  required
+                  maxLength={120}
+                  className="auth-input"
+                  placeholder="you@example.com"
+                />
+              </Field>
+
+              <Field
+                label="Password"
+                hint={
+                  <span className="text-[var(--ll-muted,#64748b)]">
+                    8+ chars
+                  </span>
+                }
+              >
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={form.password}
+                    onChange={(e) =>
+                      setForm({ ...form, password: e.target.value })
+                    }
+                    required
+                    minLength={8}
+                    maxLength={72}
+                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}"
+                    className="auth-input pr-16"
+                  />
                   <button
-                    key={nextRole}
                     type="button"
-                    onClick={() => setRole(nextRole)}
-                    className={`rounded-[1rem] px-3 py-2.5 text-xs font-bold capitalize transition sm:text-sm ${
-                      role === nextRole
-                        ? "bg-[var(--c-primary)] text-white shadow-sm"
-                        : "text-[var(--c-ink)] hover:bg-white"
-                    }`}
+                    onClick={() => setShowPassword((s) => !s)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold uppercase tracking-wider text-[var(--ll-muted,#64748b)] hover:text-[var(--ll-ink,#0f172a)]"
                   >
-                    {nextRole}
+                    {showPassword ? "Hide" : "Show"}
                   </button>
-                ))}
-              </div>
-
-              <div className="mt-6 space-y-5">
-                <label className="block">
-                  <span className="mb-2 block text-sm font-bold text-[var(--c-ink)]">
-                    Full name
-                  </span>
-                  <input className="auth-input" placeholder="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required minLength={2} maxLength={80} pattern="[A-Za-z][A-Za-z\\s'.-]*" title="Use letters, spaces, apostrophes, periods, and hyphens only." />
-                </label>
-                <label className="block">
-                  <span className="mb-2 block text-sm font-bold text-[var(--c-ink)]">
-                    Email address
-                  </span>
-                  <input className="auth-input" placeholder="you@example.com" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} autoComplete="email" required maxLength={120} />
-                </label>
-                <label className="block">
-                  <span className="mb-2 block text-sm font-bold text-[var(--c-ink)]">
-                    Password
-                  </span>
-                  <div className="relative">
-                    <input className="auth-input pr-12" placeholder="Create a password" type={showPassword ? "text" : "password"} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} autoComplete="new-password" required minLength={8} maxLength={72} pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}" title="Use at least 8 characters with uppercase, lowercase, and a number." />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((current) => !current)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--c-ink-soft)] transition hover:text-[var(--c-ink)]"
-                      aria-label={showPassword ? "Hide password" : "Show password"}
-                    >
-                      {showPassword ? "Hide" : "Show"}
-                    </button>
-                  </div>
-                  <p className="mt-2 text-xs font-semibold text-[var(--c-muted)]">
-                    At least 8 characters with uppercase, lowercase, and a number.
-                  </p>
-                </label>
-                {role === "donor" && (
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <label className="block">
-                      <span className="mb-2 block text-sm font-bold text-[var(--c-ink)]">
-                        Blood type
-                      </span>
-                      <select className="auth-input" value={form.bloodType} onChange={(e) => setForm({ ...form, bloodType: e.target.value })} required>
-                        {bloodTypes.map((type) => (
-                          <option key={type} value={type}>{type}</option>
-                        ))}
-                      </select>
-                    </label>
-                    <label className="block">
-                      <span className="mb-2 block text-sm font-bold text-[var(--c-ink)]">
-                        Location
-                      </span>
-                      <input className="auth-input" placeholder="City or area" value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} required minLength={2} maxLength={120} pattern="[A-Za-z0-9\\s,.'-]+" title="Use a real city/area name. Letters, numbers, spaces, commas, periods, apostrophes, and hyphens only." />
-                    </label>
-                  </div>
-                )}
-              </div>
-
-              {error && (
-                <p className="mt-5 rounded-[1rem] border border-[var(--c-panel-border)] bg-[var(--c-bg-soft)] px-4 py-3 text-sm font-semibold text-[var(--c-ink-soft)]">
-                  {error}
+                </div>
+                <p className="mt-1.5 text-xs text-[var(--ll-muted,#64748b)]">
+                  Upper + lowercase + a number.
                 </p>
+              </Field>
+
+              {role === "donor" && (
+                <div className="grid grid-cols-2 gap-3">
+                  <Field label="Blood type">
+                    <select
+                      value={form.bloodType}
+                      onChange={(e) =>
+                        setForm({ ...form, bloodType: e.target.value })
+                      }
+                      className="auth-input"
+                    >
+                      {bloodTypes.map((t) => (
+                        <option key={t} value={t}>
+                          {t}
+                        </option>
+                      ))}
+                    </select>
+                  </Field>
+                  <Field label="Location">
+                    <input
+                      value={form.location}
+                      onChange={(e) =>
+                        setForm({ ...form, location: e.target.value })
+                      }
+                      required
+                      minLength={2}
+                      maxLength={120}
+                      pattern="[A-Za-z0-9\s,.'-]+"
+                      className="auth-input"
+                      placeholder="City, area"
+                    />
+                  </Field>
+                </div>
               )}
 
-              <button className="auth-button mt-6 w-full" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <span className="inline-flex items-center justify-center gap-2">
-                    <span className="loading-spinner" />
-                    Creating account
-                  </span>
-                ) : "Create Account"}
+              {error && (
+                <div className="rounded-xl border border-[var(--ll-accent,#ef4444)]/30 bg-[var(--ll-accent,#ef4444)]/10 px-4 py-3 text-sm font-medium text-[var(--ll-accent,#ef4444)]">
+                  {error}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full rounded-xl bg-[var(--ll-ink,#0f172a)] px-5 py-3.5 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[var(--ll-accent,#ef4444)] disabled:opacity-60"
+              >
+                {isSubmitting ? "Creating…" : "Create account →"}
               </button>
-              <div className="soft-panel mt-6 rounded-[1.25rem] p-4 text-center">
-                <p className="text-sm text-[var(--c-ink)]">
-                  Already have an account?{" "}
-                  <Link
-                    to="/login"
-                    state={{ from: "register" }}
-                    className="font-bold text-[var(--c-ink)] underline decoration-transparent transition hover:decoration-[var(--c-ink)]"
-                  >
-                    Login
-                  </Link>
-                </p>
-              </div>
+
+              <p className="pt-2 text-center text-sm text-[var(--ll-muted,#64748b)]">
+                Already have an account?{" "}
+                <Link
+                  to="/login"
+                  state={{ from: "register" }}
+                  className="font-bold text-[var(--ll-ink,#0f172a)] underline-offset-4 hover:underline"
+                >
+                  Sign in
+                </Link>
+              </p>
+            </form>
+          </div>
+        </main>
+
+        {/* RIGHT — dark setup-path panel */}
+        <aside className="relative hidden flex-col justify-between overflow-hidden bg-[var(--ll-ink,#0f172a)] p-10 text-white lg:order-2 lg:flex xl:p-14">
+          <div
+            className="pointer-events-none absolute -left-32 -bottom-32 h-96 w-96 rounded-full opacity-30 blur-3xl"
+            style={{
+              background:
+                "radial-gradient(closest-side, var(--ll-accent,#ef4444), transparent)",
+            }}
+          />
+          <header className="relative flex items-center gap-3">
+            <div className="grid h-10 w-10 place-items-center rounded-lg bg-[var(--ll-accent,#ef4444)] font-black">
+              L
             </div>
-          </form>
-        </div>
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.22em] text-white/50">
+                LifeLine
+              </p>
+              <p className="text-sm font-semibold">Onboarding</p>
+            </div>
+          </header>
+
+          <div className="relative space-y-8">
+            <p className="text-xs uppercase tracking-[0.3em] text-white/40">
+              3 steps · ~1 min
+            </p>
+            <h1
+              className="text-5xl font-black leading-[1.05] xl:text-6xl"
+              style={{ fontFamily: "Epilogue, sans-serif" }}
+            >
+              Join the{" "}
+              <span className="text-[var(--ll-accent,#ef4444)]">network</span>
+              <br />
+              that answers first.
+            </h1>
+
+            <ol className="space-y-4">
+              {[
+                [
+                  "01",
+                  "Choose your role",
+                  "Donor or requester — pick the workflow that fits.",
+                ],
+                [
+                  "02",
+                  "Add contact details",
+                  "Name, email, password. Donors add type + area.",
+                ],
+                ["03", "Open your dashboard", "Live queue ready in seconds."],
+              ].map(([n, title, body]) => (
+                <li
+                  key={n}
+                  className="flex gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4"
+                >
+                  <span
+                    className="text-2xl font-black text-[var(--ll-accent,#ef4444)]"
+                    style={{ fontFamily: "Epilogue, sans-serif" }}
+                  >
+                    {n}
+                  </span>
+                  <div>
+                    <p className="text-sm font-bold text-white">{title}</p>
+                    <p className="mt-0.5 text-sm text-white/60">{body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="relative grid grid-cols-2 gap-3">
+            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">
+                Coverage
+              </p>
+              <p
+                className="mt-1 text-2xl font-black"
+                style={{ fontFamily: "Epilogue, sans-serif" }}
+              >
+                24/7
+              </p>
+            </div>
+            <div className="rounded-xl border border-[var(--ll-accent,#ef4444)]/40 bg-[var(--ll-accent,#ef4444)]/10 p-4">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-white/60">
+                Matching
+              </p>
+              <p
+                className="mt-1 text-2xl font-black"
+                style={{ fontFamily: "Epilogue, sans-serif" }}
+              >
+                Live
+              </p>
+            </div>
+          </div>
+        </aside>
       </div>
-    </section>
+
+      <style>{`
+        .auth-input {
+          width: 100%;
+          border-radius: 0.75rem;
+          border: 1px solid var(--ll-line, #e2e8f0);
+          background: #fff;
+          padding: 0.85rem 1rem;
+          font-size: 0.95rem;
+          color: var(--ll-ink, #0f172a);
+          transition: border-color .15s, box-shadow .15s;
+        }
+        .auth-input:focus {
+          outline: none;
+          border-color: var(--ll-ink, #0f172a);
+          box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.08);
+        }
+      `}</style>
+    </div>
+  );
+}
+
+function Field({ label, hint, children }: FieldProps) {
+  return (
+    <label className="block">
+      <div className="mb-2 flex items-center justify-between">
+        <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--ll-muted,#64748b)]">
+          {label}
+        </span>
+        {hint && <span className="text-xs font-semibold">{hint}</span>}
+      </div>
+      {children}
+    </label>
   );
 }

@@ -3,10 +3,25 @@ import { api } from "../api";
 
 type Props = { token: string };
 
-const urgencyStyles: Record<string, string> = {
-  normal: "bg-[#FFF1F5] text-[#D02752]",
-  urgent: "bg-[#FFF0F4] text-[#D02752]",
-  critical: "bg-[#FFE5EA] text-[#D02752]",
+const urgencyStyles: Record<
+  string,
+  { dot: string; pill: string; label: string }
+> = {
+  normal: {
+    dot: "bg-slate-400",
+    pill: "bg-slate-100 text-slate-700 border-slate-200",
+    label: "Normal",
+  },
+  urgent: {
+    dot: "bg-amber-500",
+    pill: "bg-amber-50 text-amber-700 border-amber-200",
+    label: "Urgent",
+  },
+  critical: {
+    dot: "bg-[var(--ll-accent,#ef4444)]",
+    pill: "bg-red-50 text-red-700 border-red-200",
+    label: "Critical",
+  },
 };
 
 const statusLabels: Record<string, string> = {
@@ -24,6 +39,7 @@ export default function DonorDashboard({ token }: Props) {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isToggling, setIsToggling] = useState(false);
   const [acceptingId, setAcceptingId] = useState<number | null>(null);
+
   const [matchFilter, setMatchFilter] = useState({
     bloodType: "",
     location: "",
@@ -33,31 +49,46 @@ export default function DonorDashboard({ token }: Props) {
 
   const load = async (showRefresh = false) => {
     if (showRefresh) setIsRefreshing(true);
+
     const params = new URLSearchParams();
     if (matchFilter.bloodType) params.set("bloodType", matchFilter.bloodType);
     if (matchFilter.location) params.set("location", matchFilter.location);
     if (matchFilter.urgency) params.set("urgency", matchFilter.urgency);
     if (matchFilter.search) params.set("search", matchFilter.search);
+
     const [profileData, matchData] = await Promise.all([
       api("/donors/me", {}, token),
-      api<{ requests: any[] }>(`/donors/requests/matches?${params.toString()}`, {}, token),
+      api<{ requests: any[] }>(
+        `/donors/requests/matches?${params.toString()}`,
+        {},
+        token,
+      ),
     ]);
+
     setProfile(profileData);
     setMatches(matchData.requests);
     setIsLoading(false);
     setIsRefreshing(false);
   };
 
-  useEffect(() => { load(); }, [token]);
+  useEffect(() => {
+    load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   const toggle = async () => {
     if (!profile) return;
     setIsToggling(true);
     try {
-      await api("/donors/me", {
-        method: "PATCH",
-        body: JSON.stringify({ availability: !profile.availability }),
-      }, token);
+      await api(
+        "/donors/me",
+        {
+          method: "PATCH",
+          body: JSON.stringify({ availability: !profile.availability }),
+        },
+        token,
+      );
+
       setProfile({ ...profile, availability: !profile.availability });
       setMessage("");
       await load();
@@ -79,211 +110,417 @@ export default function DonorDashboard({ token }: Props) {
     }
   };
 
+  const criticalCount = matches.filter((m) => m.urgency === "critical").length;
+  const urgentCount = matches.filter((m) => m.urgency === "urgent").length;
+
   if (isLoading || !profile) {
     return (
-      <div className="panel animate-page-in p-6">
-        <div className="mb-5 flex items-center gap-3 text-sm font-semibold text-[#D02752]">
-          <span className="loading-spinner" />
-          Loading donor profile...
+      <section
+        className="min-h-screen bg-[var(--ll-bg,#f8fafc)] px-6 py-10"
+        style={{ fontFamily: "'Epilogue', system-ui, sans-serif" }}
+      >
+        <div className="mx-auto max-w-6xl rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+          <div className="flex items-center gap-3 text-sm font-semibold text-slate-500">
+            <span className="loading-spinner" />
+            Loading donor workspace…
+          </div>
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <div className="h-24 animate-pulse rounded-2xl bg-slate-100" />
+            <div className="h-24 animate-pulse rounded-2xl bg-slate-100" />
+            <div className="h-24 animate-pulse rounded-2xl bg-slate-100" />
+          </div>
         </div>
-        <div className="grid gap-3 sm:grid-cols-3">
-          <div className="skeleton-line h-20" />
-          <div className="skeleton-line h-20" />
-          <div className="skeleton-line h-20" />
-        </div>
-      </div>
+      </section>
     );
   }
 
   return (
-    <section className="animate-page-in space-y-6">
-      <div className="dashboard-hero overflow-hidden">
-        <div className="grid gap-6 p-6 md:grid-cols-[1.5fr_0.9fr] md:p-8">
-          <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#D02752]">
-              Donor Dashboard
-            </p>
-            <h2 className="mt-3 text-3xl font-black leading-tight text-[#8A244B] sm:text-4xl">
-              Your donation workspace
-            </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-[#8A244B]">
-              Check your status, review matching requests, and respond quickly when you are needed.
-            </p>
-          </div>
-          <div className="dashboard-stat p-5">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#D02752]">Current availability</p>
-            <p className="mt-2 text-2xl font-black text-[#8A244B]">{profile.availability ? "Available" : "Paused"}</p>
-            <p className="mt-2 text-sm text-[#8A244B]">
-              {profile.availability ? "You can accept new matches right now." : "Turn availability on to receive matchable requests."}
-            </p>
-            <button
-              onClick={toggle}
-              disabled={isToggling}
-              className={`mt-5 w-full rounded-[1rem] px-4 py-3 text-sm font-bold transition ${
-                profile.availability
-                  ? "border border-[#F1CAD5] bg-white text-[#8A244B] hover:bg-[#FFF5F8]"
-                  : "bg-[#F63049] text-white hover:bg-[#D02752]"
-              }`}
-            >
-              {isToggling ? (
-                <span className="inline-flex items-center gap-2">
-                  <span className="loading-spinner" />
-                  Updating
-                </span>
-              ) : profile.availability ? "Pause Availability" : "Mark Available"}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-3">
-        <article className="dashboard-stat animate-card-in p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#D02752]">
-            Blood Type
-          </p>
-          <p className="mt-3 text-3xl font-black text-[#8A244B]">
-            {profile.blood_type}
-          </p>
-        </article>
-        <article className="dashboard-stat animate-card-in p-5" style={{ animationDelay: "60ms" }}>
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#D02752]">
-            Location
-          </p>
-          <p className="mt-3 text-xl font-bold text-[#8A244B]">
-            {profile.location}
-          </p>
-        </article>
-        <article className="dashboard-stat animate-card-in p-5" style={{ animationDelay: "120ms" }}>
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#D02752]">
-            Status
-          </p>
-          <span
-            className={`mt-3 inline-flex rounded-full px-3 py-1 text-sm font-bold ${
-              profile.availability
-                ? "bg-[#FFE5EA] text-[#8A244B]"
-                : "bg-[#FFF1F5] text-[#8A244B]"
-            }`}
-          >
-            {profile.availability ? "Available for matches" : "Not available"}
-          </span>
-        </article>
-      </div>
-      <section className="dashboard-section animate-card-in overflow-hidden">
-        <div className="dashboard-section-header p-5">
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#D02752]">
-                Matching Requests
-              </p>
-              <h3 className="mt-1 text-xl font-black text-[#8A244B]">
-                Requests You Can Respond To
-              </h3>
-              <p className="mt-1 text-sm text-[#8A244B]">
-                Matches use your blood type and location, then prioritize urgent cases.
-              </p>
+    <section
+      className="min-h-screen bg-[var(--ll-bg,#f8fafc)] px-4 py-8 sm:px-6 lg:px-10"
+      style={{ fontFamily: "'Epilogue', system-ui, sans-serif" }}
+    >
+      <div className="mx-auto max-w-7xl space-y-8">
+        {/* SPLIT HERO */}
+        <div className="grid overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm lg:grid-cols-[1fr_1.05fr]">
+          {/* Dark operational panel */}
+          <div className="relative bg-[var(--ll-ink,#0f172a)] p-8 text-white lg:p-10">
+            <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.32em] text-slate-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--ll-accent,#ef4444)]" />
+              Donor Console
             </div>
-            <button className="btn-secondary w-full sm:w-auto" onClick={() => load(true)} disabled={isRefreshing}>
-              {isRefreshing ? (
-                <span className="inline-flex items-center gap-2">
-                  <span className="loading-spinner" />
-                  Refreshing
-                </span>
-              ) : "Refresh Matches"}
-            </button>
-          </div>
-          {message && (
-            <p className="mt-4 rounded-[1rem] border border-[#E4EDF6] bg-[#FFF5F8] px-4 py-3 text-sm font-semibold text-[#D02752]">
-              {message}
+
+            <h2
+              className="mt-6 text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl"
+              style={{ fontFamily: "'Urbanist', system-ui, sans-serif" }}
+            >
+              Ready when
+              <br />
+              <span className="text-[var(--ll-accent,#ef4444)]">
+                the call comes.
+              </span>
+            </h2>
+
+            <p className="mt-4 max-w-md text-sm leading-7 text-slate-300">
+              Your blood type, location, and availability decide who reaches
+              you. Toggle on, scan the queue, accept in one tap.
             </p>
-          )}
-        </div>
-        <div className="dashboard-filter-grid border-b border-[#F6D6DE] p-5">
-          <input
-            className="auth-input"
-            placeholder="Filter blood type"
-            value={matchFilter.bloodType}
-            onChange={(e) => setMatchFilter({ ...matchFilter, bloodType: e.target.value })}
-          />
-          <input
-            className="auth-input"
-            placeholder="Filter location"
-            value={matchFilter.location}
-            onChange={(e) => setMatchFilter({ ...matchFilter, location: e.target.value })}
-          />
-          <select
-            className="auth-input"
-            value={matchFilter.urgency}
-            onChange={(e) => setMatchFilter({ ...matchFilter, urgency: e.target.value })}
-          >
-            <option value="">All urgency</option>
-            <option value="normal">Normal</option>
-            <option value="urgent">Urgent</option>
-            <option value="critical">Critical</option>
-          </select>
-          <input
-            className="auth-input"
-            placeholder="Search hospital or contact"
-            value={matchFilter.search}
-            onChange={(e) => setMatchFilter({ ...matchFilter, search: e.target.value })}
-          />
-          <button className="btn-secondary lg:h-[3.3rem]" onClick={() => load(true)} disabled={isRefreshing}>
-            {isRefreshing ? <span className="loading-spinner" /> : "Search"}
-          </button>
-        </div>
-        <div className="grid gap-4 p-5 xl:grid-cols-2">
-          {matches.map((req, index) => (
-            <article key={req.id} className="android-list-item animate-card-in p-5" style={{ animationDelay: `${index * 45}ms` }}>
-              <div className="flex flex-wrap items-start justify-between gap-3">
+
+            <div className="mt-8 grid grid-cols-3 gap-3 border-t border-white/10 pt-6">
+              <Stat label="Matches" value={String(matches.length)} />
+              <Stat label="Critical" value={String(criticalCount)} accent />
+              <Stat label="Urgent" value={String(urgentCount)} />
+            </div>
+
+            <div className="mt-6 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+              <span className="relative flex h-2.5 w-2.5">
+                {profile.availability && (
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                )}
+                <span
+                  className={`relative inline-flex h-2.5 w-2.5 rounded-full ${
+                    profile.availability ? "bg-emerald-400" : "bg-slate-500"
+                  }`}
+                />
+              </span>
+              <div className="flex-1">
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">
+                  Live status
+                </p>
+                <p className="text-sm font-semibold text-white">
+                  {profile.availability
+                    ? "Available to be matched"
+                    : "Paused — not receiving"}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Light availability panel */}
+          <div className="flex flex-col justify-between gap-6 p-8 lg:p-10">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[var(--ll-accent,#ef4444)]">
+                Profile
+              </p>
+              <h3
+                className="mt-2 text-2xl font-black tracking-tight text-slate-900 sm:text-3xl"
+                style={{ fontFamily: "'Urbanist', system-ui, sans-serif" }}
+              >
+                Your donation workspace
+              </h3>
+
+              <div className="mt-6 grid grid-cols-3 gap-3">
+                <ProfileCell
+                  label="Blood type"
+                  value={profile.blood_type}
+                  highlight
+                />
+                <ProfileCell label="Location" value={profile.location || "—"} />
+                <ProfileCell
+                  label="State"
+                  value={profile.availability ? "Active" : "Paused"}
+                />
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-2xl font-black text-[#8A244B]">
-                    {req.blood_type}
-                    <span className="ml-2 text-base font-bold text-[#8A244B]">
-                      {req.units} units
-                    </span>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-500">
+                    Availability switch
                   </p>
-                  <p className="mt-2 text-sm font-semibold text-[#8A244B]">
-                    {req.hospital || "Hospital not set"}
+                  <p
+                    className="mt-1 text-lg font-black text-slate-900"
+                    style={{ fontFamily: "'Urbanist', system-ui, sans-serif" }}
+                  >
+                    {profile.availability
+                      ? "You're on call."
+                      : "You're paused."}
+                  </p>
+                  <p className="mt-1 text-sm text-slate-600">
+                    {profile.availability
+                      ? "Requests matching your type will appear here in real time."
+                      : "Turn on to start receiving matchable requests."}
                   </p>
                 </div>
-                <span className={`rounded-full px-3 py-1 text-xs font-bold capitalize ${urgencyStyles[req.urgency] ?? urgencyStyles.normal}`}>
-                  {req.urgency}
-                </span>
               </div>
-              <div className="mt-4 grid gap-2 border-t border-[#F8DDE4] pt-4 text-sm text-[#8A244B] sm:grid-cols-2">
-                <p>
-                  <span className="font-bold text-[#8A244B]">Location:</span>{" "}
-                  {req.location || "Not provided"}
-                </p>
-                <p>
-                  <span className="font-bold text-[#8A244B]">Status:</span>{" "}
-                  {statusLabels[req.status] ?? req.status}
-                </p>
-                <p className="sm:col-span-2">
-                  <span className="font-bold text-[#8A244B]">Contact:</span>{" "}
-                  {req.contact || "Not provided"}
-                </p>
-              </div>
+
               <button
-                className="auth-button mt-5 w-full"
-                onClick={() => acceptRequest(req.id)}
-                disabled={!profile.availability || acceptingId === req.id}
+                onClick={toggle}
+                disabled={isToggling}
+                className={`mt-4 w-full rounded-xl px-4 py-3 text-sm font-bold tracking-wide transition disabled:opacity-60 ${
+                  profile.availability
+                    ? "border border-slate-300 bg-white text-slate-900 hover:bg-slate-100"
+                    : "bg-[var(--ll-ink,#0f172a)] text-white hover:bg-[var(--ll-accent,#ef4444)]"
+                }`}
               >
-                {acceptingId === req.id ? (
+                {isToggling ? (
                   <span className="inline-flex items-center justify-center gap-2">
                     <span className="loading-spinner" />
-                    Accepting
+                    Updating
                   </span>
-                ) : profile.availability ? "Accept Request" : "Mark Available to Accept"}
+                ) : profile.availability ? (
+                  "Pause availability"
+                ) : (
+                  "Mark available"
+                )}
               </button>
-            </article>
-          ))}
-          {matches.length === 0 && (
-            <p className="rounded-[1.25rem] border border-dashed border-[#F1CAD5] bg-[#FFF5F8] p-5 text-sm text-[#8A244B] lg:col-span-2">
-              No open matching requests found for your blood type and location.
-            </p>
-          )}
+            </div>
+          </div>
         </div>
-      </section>
+
+        {/* QUEUE */}
+        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-slate-200 p-6 sm:p-8">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-[var(--ll-accent,#ef4444)]">
+                Live queue
+              </p>
+              <h3
+                className="mt-2 text-2xl font-black tracking-tight text-slate-900 sm:text-3xl"
+                style={{ fontFamily: "'Urbanist', system-ui, sans-serif" }}
+              >
+                Requests you can respond to
+              </h3>
+              <p className="mt-1 max-w-xl text-sm text-slate-600">
+                Matched by your blood type and location, then sorted by urgency.
+              </p>
+            </div>
+
+            <button
+              onClick={() => load(true)}
+              disabled={isRefreshing}
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-slate-900 transition hover:bg-slate-100 disabled:opacity-60"
+            >
+              {isRefreshing ? (
+                <>
+                  <span className="loading-spinner" /> Refreshing
+                </>
+              ) : (
+                <>↻ Refresh</>
+              )}
+            </button>
+          </div>
+
+          {message && (
+            <div className="border-b border-slate-200 bg-slate-50 px-6 py-3 text-sm font-semibold text-slate-900 sm:px-8">
+              {message}
+            </div>
+          )}
+
+          {/* Filter rail */}
+          <div className="grid gap-3 border-b border-slate-200 bg-slate-50/60 p-6 sm:p-8 md:grid-cols-[1fr_1fr_180px_1.4fr_auto]">
+            <FilterInput
+              placeholder="Blood type"
+              value={matchFilter.bloodType}
+              onChange={(v) => setMatchFilter({ ...matchFilter, bloodType: v })}
+            />
+            <FilterInput
+              placeholder="Location"
+              value={matchFilter.location}
+              onChange={(v) => setMatchFilter({ ...matchFilter, location: v })}
+            />
+
+            <select
+              className="h-11 rounded-xl border border-slate-300 bg-white px-3 text-sm font-medium text-slate-900 focus:border-[var(--ll-accent,#ef4444)] focus:outline-none focus:ring-2 focus:ring-red-100"
+              value={matchFilter.urgency}
+              onChange={(e) =>
+                setMatchFilter({ ...matchFilter, urgency: e.target.value })
+              }
+            >
+              <option value="">All urgency</option>
+              <option value="normal">Normal</option>
+              <option value="urgent">Urgent</option>
+              <option value="critical">Critical</option>
+            </select>
+
+            <FilterInput
+              placeholder="Search hospital or contact"
+              value={matchFilter.search}
+              onChange={(v) => setMatchFilter({ ...matchFilter, search: v })}
+            />
+
+            <button
+              className="h-11 rounded-xl bg-[var(--ll-ink,#0f172a)] px-5 text-sm font-bold text-white transition hover:bg-[var(--ll-accent,#ef4444)] disabled:opacity-60"
+              onClick={() => load(true)}
+              disabled={isRefreshing}
+            >
+              {isRefreshing ? <span className="loading-spinner" /> : "Apply"}
+            </button>
+          </div>
+
+          {/* Cards */}
+          <div className="grid gap-4 p-6 sm:p-8 xl:grid-cols-2">
+            {matches.map((req) => {
+              const u = urgencyStyles[req.urgency] ?? urgencyStyles.normal;
+              return (
+                <article
+                  key={req.id}
+                  className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-slate-300 hover:shadow-md"
+                >
+                  <span
+                    className={`absolute left-0 top-0 h-full w-1 ${u.dot}`}
+                  />
+
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="flex items-baseline gap-2">
+                        <span
+                          className="text-3xl font-black tracking-tight text-slate-900"
+                          style={{
+                            fontFamily: "'Urbanist', system-ui, sans-serif",
+                          }}
+                        >
+                          {req.blood_type}
+                        </span>
+                        <span className="text-sm font-bold text-slate-500">
+                          · {req.units} units
+                        </span>
+                      </div>
+                      <p className="mt-1 text-sm font-semibold text-slate-700">
+                        {req.hospital || "Hospital not set"}
+                      </p>
+                    </div>
+
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider ${u.pill}`}
+                    >
+                      <span className={`h-1.5 w-1.5 rounded-full ${u.dot}`} />
+                      {u.label}
+                    </span>
+                  </div>
+
+                  <div className="mt-4 grid gap-x-4 gap-y-2 border-t border-slate-100 pt-4 pl-2 text-sm sm:grid-cols-2">
+                    <MetaRow
+                      label="Location"
+                      value={req.location || "Not provided"}
+                    />
+                    <MetaRow
+                      label="Status"
+                      value={statusLabels[req.status] ?? req.status}
+                    />
+                    <div className="sm:col-span-2">
+                      <MetaRow
+                        label="Contact"
+                        value={req.contact || "Not provided"}
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    className="mt-5 w-full rounded-xl bg-[var(--ll-ink,#0f172a)] px-4 py-3 text-sm font-bold tracking-wide text-white transition hover:bg-[var(--ll-accent,#ef4444)] disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-500"
+                    onClick={() => acceptRequest(req.id)}
+                    disabled={!profile.availability || acceptingId === req.id}
+                  >
+                    {acceptingId === req.id ? (
+                      <span className="inline-flex items-center justify-center gap-2">
+                        <span className="loading-spinner" /> Accepting
+                      </span>
+                    ) : profile.availability ? (
+                      "Accept request →"
+                    ) : (
+                      "Mark available to accept"
+                    )}
+                  </button>
+                </article>
+              );
+            })}
+
+            {matches.length === 0 && (
+              <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-600 xl:col-span-2">
+                <p className="font-semibold text-slate-900">
+                  No open matches right now.
+                </p>
+                <p className="mt-1">
+                  We'll surface new requests here the moment they're posted.
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </section>
+  );
+}
+
+function Stat({
+  label,
+  value,
+  accent = false,
+}: {
+  label: string;
+  value: string;
+  accent?: boolean;
+}) {
+  return (
+    <div>
+      <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-slate-400">
+        {label}
+      </p>
+      <p
+        className={`mt-1 text-2xl font-black tracking-tight ${
+          accent ? "text-[var(--ll-accent,#ef4444)]" : "text-white"
+        }`}
+        style={{ fontFamily: "'Urbanist', system-ui, sans-serif" }}
+      >
+        {value}
+      </p>
+    </div>
+  );
+}
+
+function ProfileCell({
+  label,
+  value,
+  highlight = false,
+}: {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div
+      className={`rounded-2xl border p-4 ${
+        highlight ? "border-red-200 bg-red-50" : "border-slate-200 bg-white"
+      }`}
+    >
+      <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500">
+        {label}
+      </p>
+      <p
+        className={`mt-1 text-lg font-black tracking-tight ${
+          highlight ? "text-[var(--ll-accent,#ef4444)]" : "text-slate-900"
+        }`}
+        style={{ fontFamily: "'Urbanist', system-ui, sans-serif" }}
+      >
+        {value}
+      </p>
+    </div>
+  );
+}
+
+function FilterInput({
+  placeholder,
+  value,
+  onChange,
+}: {
+  placeholder: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  return (
+    <input
+      className="h-11 rounded-xl border border-slate-300 bg-white px-3.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-[var(--ll-accent,#ef4444)] focus:outline-none focus:ring-2 focus:ring-red-100"
+      placeholder={placeholder}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    />
+  );
+}
+
+function MetaRow({ label, value }: { label: string; value: string }) {
+  return (
+    <p className="text-slate-600">
+      <span className="font-bold text-slate-900">{label}:</span> {value}
+    </p>
   );
 }

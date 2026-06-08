@@ -3,17 +3,32 @@ import { api } from "../api";
 
 type Props = { token: string };
 
-const urgencyStyles: Record<string, string> = {
-  normal: "bg-[#FFF1F5] text-[#D02752]",
-  urgent: "bg-[#FFF0F4] text-[#D02752]",
-  critical: "bg-[#FFE5EA] text-[#D02752]",
+const urgencyStyles: Record<
+  string,
+  { pill: string; dot: string; bar: string }
+> = {
+  normal: {
+    pill: "bg-slate-100 text-slate-700",
+    dot: "bg-slate-400",
+    bar: "bg-slate-400",
+  },
+  urgent: {
+    pill: "bg-amber-100 text-amber-800",
+    dot: "bg-amber-500",
+    bar: "bg-amber-500",
+  },
+  critical: {
+    pill: "bg-red-100 text-red-700",
+    dot: "bg-red-600",
+    bar: "bg-red-600",
+  },
 };
 
 const statusStyles: Record<string, string> = {
-  pending: "bg-[#FFF1F5] text-[#8A244B]",
-  approved: "bg-[#FFEAF0] text-[#D02752]",
-  in_progress: "bg-[#E6F7F4] text-[#8A244B]",
-  completed: "bg-[#FFE5EA] text-[#8A244B]",
+  pending: "bg-slate-100 text-slate-700 ring-1 ring-slate-200",
+  approved: "bg-blue-50 text-blue-700 ring-1 ring-blue-200",
+  in_progress: "bg-amber-50 text-amber-800 ring-1 ring-amber-200",
+  completed: "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200",
 };
 
 const statusLabels: Record<string, string> = {
@@ -23,11 +38,19 @@ const statusLabels: Record<string, string> = {
   completed: "Completed",
 };
 
+const FONT_HEAD = { fontFamily: "Urbanist, system-ui, sans-serif" };
+const FONT_BODY = { fontFamily: "Epilogue, system-ui, sans-serif" };
+
 export default function AdminDashboard({ token }: Props) {
   const [metrics, setMetrics] = useState<any>(null);
   const [requests, setRequests] = useState<any[]>([]);
   const [actionKey, setActionKey] = useState("");
   const [error, setError] = useState("");
+
+  const [filter, setFilter] = useState<
+    "all" | "pending" | "approved" | "in_progress" | "completed"
+  >("all");
+  const [query, setQuery] = useState("");
 
   const load = async () => {
     setError("");
@@ -47,13 +70,17 @@ export default function AdminDashboard({ token }: Props) {
     load();
   }, []);
 
-  const updateRequest = async (id: number, patch: Record<string, unknown>) => {
+  const updateRequest = async (
+    id: number,
+    patch: Record<string, unknown>,
+  ) => {
     setActionKey(`${id}-${Object.keys(patch).join("-")}`);
     try {
-      await api(`/admin/requests/${id}`, {
-        method: "PATCH",
-        body: JSON.stringify(patch),
-      }, token);
+      await api(
+        `/admin/requests/${id}`,
+        { method: "PATCH", body: JSON.stringify(patch) },
+        token,
+      );
       await load();
     } finally {
       setActionKey("");
@@ -63,8 +90,18 @@ export default function AdminDashboard({ token }: Props) {
   const findMatches = async (id: number) => {
     setActionKey(`${id}-matches`);
     try {
-      const result = await api<{ donors: any[] }>(`/requests/${id}/matches`, {}, token);
-      alert(`Matched donors: ${result.donors.map((d) => `${d.name} (${d.blood_type})`).join(", ") || "none"}`);
+      const result = await api<{ donors: any[] }>(
+        `/requests/${id}/matches`,
+        {},
+        token,
+      );
+      alert(
+        `Matched donors: ${
+          result.donors
+            .map((d) => `${d.name} (${d.blood_type})`)
+            .join(", ") || "none"
+        }`,
+      );
     } finally {
       setActionKey("");
     }
@@ -72,193 +109,373 @@ export default function AdminDashboard({ token }: Props) {
 
   const maxUrgency = Math.max(
     1,
-    ...((metrics?.requestsByUrgency ?? []).map((item: any) => item.count) as number[]),
-  );
+    ...(((metrics?.requestsByUrgency ?? []).map(
+      (i: any) => i.count,
+    ) as number[]) || []));
 
   if (!metrics) {
     return (
-      <div className="panel animate-page-in p-6">
+      <section
+        className="min-h-[60vh] rounded-3xl bg-white p-8 ring-1 ring-slate-200"
+        style={FONT_BODY}
+      >
         {error ? (
           <div className="space-y-4">
-            <p className="rounded-[1rem] border border-[#F0D7DD] bg-[#FBF1F4] px-4 py-3 text-sm font-semibold text-[#D02752]">
+            <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
               {error}
             </p>
-            <button className="btn-secondary" onClick={load}>
-              Retry Loading Admin Dashboard
+            <button
+              onClick={load}
+              className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600 transition"
+            >
+              Retry
             </button>
           </div>
         ) : (
-          <>
-            <div className="mb-5 flex items-center gap-3 text-sm font-semibold text-[#D02752]">
-              <span className="loading-spinner" />
-              Loading admin dashboard...
-            </div>
+          <div className="space-y-4">
+            <p className="text-sm font-semibold text-slate-500">
+              Loading admin console…
+            </p>
             <div className="grid gap-3 sm:grid-cols-3">
-              <div className="skeleton-line h-24" />
-              <div className="skeleton-line h-24" />
-              <div className="skeleton-line h-24" />
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="h-24 animate-pulse rounded-2xl bg-slate-100"
+                />
+              ))}
             </div>
-          </>
+          </div>
         )}
-      </div>
+      </section>
     );
   }
 
+  // NOTE: `filtered2` is the real search filter used by the UI.
+  // Keep this component simple: do not render a second filtered list.
+
+
+  const filtered2 = requests
+    .filter((r) => (filter === "all" ? true : r.status === filter))
+    .filter((r) => {
+      if (!query.trim()) return true;
+      const s = `${r.blood_type} ${r.hospital ?? ""} ${r.location ?? ""}`.toLowerCase();
+      return s.includes(query.toLowerCase());
+    });
+
+  const counts = {
+    pending: requests.filter((r) => r.status === "pending").length,
+    approved: requests.filter((r) => r.status === "approved").length,
+    in_progress: requests.filter((r) => r.status === "in_progress").length,
+    completed: requests.filter((r) => r.status === "completed").length,
+  };
+
   return (
-    <section className="animate-page-in space-y-6">
-      <div className="dashboard-hero overflow-hidden p-6 sm:p-8">
-        <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#D02752]">
-          Admin Dashboard
-        </p>
-        <h2 className="mt-3 text-3xl font-black leading-tight text-[#8A244B] sm:text-4xl">
-          System overview and queue management
-        </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-7 text-[#8A244B]">
-          Review metrics, move requests through the queue, and find donors without jumping between screens.
-        </p>
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="dashboard-stat animate-card-in p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#D02752]">
-            Total Donors
-          </p>
-          <p className="mt-3 text-4xl font-black text-[#8A244B]">
-            {metrics.totalDonors}
-          </p>
-        </div>
-        <div className="dashboard-stat animate-card-in p-5" style={{ animationDelay: "60ms" }}>
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#D02752]">
-            Active Requests
-          </p>
-          <p className="mt-3 text-4xl font-black text-[#8A244B]">
-            {metrics.activeRequests}
-          </p>
-        </div>
-        <div className="dashboard-stat animate-card-in p-5" style={{ animationDelay: "120ms" }}>
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#D02752]">
-            Urgent Cases
-          </p>
-          <p className="mt-3 text-4xl font-black text-[#8A244B]">
-            {metrics.urgentCases}
-          </p>
-        </div>
-      </div>
-
-      <div className="grid gap-4">
-        <section className="dashboard-section animate-card-in p-5">
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#D02752]">
-                Analytics
-              </p>
-              <h3 className="mt-1 text-xl font-black text-[#8A244B]">
-                Request Health
-              </h3>
+    <section className="space-y-6" style={FONT_BODY}>
+      {/* SPLIT HERO */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.1fr_1fr]">
+        {/* Left: Operational console */}
+        <div className="relative overflow-hidden rounded-3xl bg-slate-900 p-8 text-white">
+          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-red-600/20 blur-3xl" />
+          <div className="relative">
+            <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.28em] text-red-400">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+              </span>
+              Admin Console · Live
             </div>
-            <div className="rounded-full bg-[#FFE5EA] px-3 py-1 text-sm font-bold text-[#8A244B]">
-              {metrics.completedRequests} completed
+
+            <h1
+              className="mt-5 text-4xl font-black leading-[1.05] sm:text-5xl"
+              style={FONT_HEAD}
+            >
+              Triage the queue.
+              <br />
+              <span className="text-red-400">Move blood faster.</span>
+            </h1>
+
+            <p className="mt-4 max-w-md text-sm leading-7 text-slate-300">
+              Approve requests, escalate critical cases, and match donors — all
+              from one operational surface.
+            </p>
+
+            <div className="mt-8 grid grid-cols-3 gap-3">
+              <Stat label="Donors" value={metrics.totalDonors} />
+              <Stat label="Active" value={metrics.activeRequests} accent />
+              <Stat label="Urgent" value={metrics.urgentCases} />
             </div>
           </div>
-          <div className="mt-6 grid gap-5 md:grid-cols-2">
-            <div className="space-y-4">
-              {(metrics.requestsByUrgency ?? []).map((item: any) => (
+        </div>
+
+        {/* Right: Analytics card */}
+        <div className="rounded-3xl bg-white p-7 ring-1 ring-slate-200">
+          <div className="flex items-end justify-between">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-red-600">
+                Request Health
+              </p>
+              <h3
+                className="mt-1 text-2xl font-black text-slate-900"
+                style={FONT_HEAD}
+              >
+                By urgency
+              </h3>
+            </div>
+            <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200">
+              {metrics.completedRequests} completed
+            </span>
+          </div>
+
+          <div className="mt-6 space-y-4">
+            {(metrics.requestsByUrgency ?? []).map((item: any) => {
+              const s = urgencyStyles[item.urgency] ?? urgencyStyles.normal;
+              const width = `${Math.max(6, (item.count / maxUrgency) * 100)}%`;
+              return (
                 <div key={item.urgency}>
-                  <div className="mb-2 flex justify-between text-sm">
-                    <span className="font-bold capitalize text-[#8A244B]">
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span className="flex items-center gap-2 font-semibold capitalize text-slate-700">
+                      <span className={`h-2 w-2 rounded-full ${s.dot}`} />
                       {item.urgency}
                     </span>
-                    <span className="font-semibold text-[#8A244B]">
-                      {item.count}
-                    </span>
+                    <span className="font-bold text-slate-900">{item.count}</span>
                   </div>
-                  <div className="h-3 overflow-hidden rounded-full bg-[#EDF3F8]">
+                  <div className="h-2 overflow-hidden rounded-full bg-slate-100">
                     <div
-                      className={`h-full rounded-full transition-all duration-700 ${
-                        item.urgency === "critical"
-                          ? "bg-[#F63049]"
-                          : item.urgency === "urgent"
-                            ? "bg-[#D29654]"
-                            : "bg-[#6B879F]"
-                      }`}
-                      style={{ width: `${Math.max(8, (item.count / maxUrgency) * 100)}%` }}
+                      className={`h-full rounded-full transition-all duration-700 ${s.bar}`}
+                      style={{ width }}
                     />
                   </div>
                 </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-6 rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">
+              Top Locations
+            </p>
+            <div className="mt-3 space-y-2">
+              {(metrics.topLocations ?? []).slice(0, 4).map((item: any) => (
+                <div key={item.location} className="flex items-center justify-between text-sm">
+                  <span className="truncate font-semibold text-slate-700">
+                    {item.location}
+                  </span>
+                  <span className="rounded-full bg-white px-2.5 py-0.5 text-xs font-bold text-slate-900 ring-1 ring-slate-200">
+                    {item.count}
+                  </span>
+                </div>
               ))}
-            </div>
-            <div className="rounded-[1.25rem] border border-[#F6D6DE] bg-[#FFF5F8] p-4">
-              <p className="text-sm font-black text-[#8A244B]">
-                Top Request Locations
-              </p>
-              <div className="mt-4 space-y-3">
-                {(metrics.topLocations ?? []).map((item: any) => (
-                  <div key={item.location} className="flex items-center justify-between gap-3 text-sm">
-                    <span className="truncate font-semibold text-[#8A244B]">
-                      {item.location}
-                    </span>
-                    <span className="rounded-full bg-white px-2.5 py-1 font-bold text-[#8A244B]">
-                      {item.count}
-                    </span>
-                  </div>
-                ))}
-                {metrics.topLocations?.length === 0 && (
-                  <p className="text-sm text-[#8A244B]">No location data yet.</p>
-                )}
-              </div>
+              {(!metrics.topLocations || metrics.topLocations.length === 0) && (
+                <p className="text-sm text-slate-500">No location data yet.</p>
+              )}
             </div>
           </div>
-        </section>
+        </div>
       </div>
 
-      <div className="dashboard-section animate-card-in overflow-hidden">
-        <div className="dashboard-section-header p-5">
-          <h3 className="text-xl font-black text-[#8A244B]">Request Queue</h3>
-          <p className="mt-1 text-sm text-[#8A244B]">
-            Review priority, status, location, and matching actions.
-          </p>
-        </div>
-        <div className="divide-y divide-[#F6D6DE]">
-          {requests.map((req, index) => (
-            <article key={req.id} className="animate-card-in grid gap-4 p-5 lg:grid-cols-[1fr_auto]" style={{ animationDelay: `${index * 45}ms` }}>
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-lg font-black text-[#8A244B]">
-                    Request #{req.id}: {req.blood_type}
-                  </p>
-                  <span className="text-sm font-bold text-[#8A244B]">
-                    {req.units} units
-                  </span>
-                </div>
-                <p className="mt-2 text-sm text-[#8A244B]">
-                  {req.hospital || "Hospital not set"} -{" "}
-                  {req.location || "Location not provided"}
-                </p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  <span className={`rounded-full px-3 py-1 text-xs font-bold capitalize ${statusStyles[req.status] ?? statusStyles.pending}`}>
-                    {statusLabels[req.status] ?? req.status}
-                  </span>
-                  <span className={`rounded-full px-3 py-1 text-xs font-bold capitalize ${urgencyStyles[req.urgency] ?? urgencyStyles.normal}`}>
-                    {req.urgency}
-                  </span>
-                </div>
-              </div>
-              <div className="flex flex-wrap items-center gap-2 lg:justify-end">
-                <button className="rounded-[1rem] border border-[#F1CAD5] bg-white px-3 py-2 text-sm font-bold text-[#8A244B] transition hover:bg-[#FFF5F8] disabled:opacity-70" disabled={actionKey === `${req.id}-status` || req.status !== "pending"} onClick={() => updateRequest(req.id, { status: "approved" })}>{actionKey === `${req.id}-status` ? <span className="loading-spinner" /> : "Approve"}</button>
-                <button className="rounded-full bg-[#FFEAF0] px-3 py-2 text-sm font-bold text-[#8A244B] transition hover:bg-[#FFE1E9] disabled:opacity-70" disabled={actionKey === `${req.id}-status` || req.status !== "approved"} onClick={() => updateRequest(req.id, { status: "in_progress" })}>{actionKey === `${req.id}-status` ? <span className="loading-spinner" /> : "Start"}</button>
-                <button className="rounded-full bg-[#FFE5EA] px-3 py-2 text-sm font-bold text-[#8A244B] transition hover:bg-[#FFEAF0] disabled:opacity-70" disabled={actionKey === `${req.id}-status` || req.status !== "in_progress"} onClick={() => updateRequest(req.id, { status: "completed" })}>{actionKey === `${req.id}-status` ? <span className="loading-spinner" /> : "Complete"}</button>
-                <button className="rounded-full bg-[#FFE5EA] px-3 py-2 text-sm font-bold text-[#D02752] transition hover:bg-[#FFD9E2] disabled:opacity-70" disabled={actionKey === `${req.id}-urgency`} onClick={() => updateRequest(req.id, { urgency: "critical" })}>{actionKey === `${req.id}-urgency` ? <span className="loading-spinner" /> : "Mark Critical"}</button>
-                <button className="rounded-[1rem] bg-[#F63049] px-3 py-2 text-sm font-bold text-white transition hover:bg-[#D02752] disabled:opacity-70" disabled={actionKey === `${req.id}-matches`} onClick={() => findMatches(req.id)}>{actionKey === `${req.id}-matches` ? <span className="loading-spinner" /> : "Find Donors"}</button>
-              </div>
-            </article>
-          ))}
-          {requests.length === 0 && (
-            <p className="p-5 text-sm text-[#8A244B]">
-              No requests are currently in the queue.
+      {/* QUEUE WORKSPACE */}
+      <div className="rounded-3xl bg-white ring-1 ring-slate-200">
+        {/* Toolbar */}
+        <div className="flex flex-col gap-4 border-b border-slate-200 p-6 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-red-600">
+              Queue
             </p>
+            <h3 className="mt-1 text-2xl font-black text-slate-900" style={FONT_HEAD}>
+              Request center
+            </h3>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search blood type, hospital, location…"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:bg-white focus:outline-none lg:w-72"
+            />
+
+            <div className="flex flex-wrap gap-1.5 rounded-xl bg-slate-100 p-1">
+              {(["all", "pending", "approved", "in_progress", "completed"] as const).map(
+                (k) => (
+                  <button
+                    key={k}
+                    onClick={() => setFilter(k)}
+                    className={`rounded-lg px-3 py-1.5 text-xs font-bold capitalize transition ${
+                      filter === k
+                        ? "bg-slate-900 text-white"
+                        : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    {k === "all" ? "All" : statusLabels[k]}
+                    {k !== "all" && <span className="ml-1.5 opacity-70">{(counts as any)[k]}</span>}
+                  </button>
+                ),
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Rows */}
+        <div className="divide-y divide-slate-100">
+          {filtered2.map((req) => {
+            const u = urgencyStyles[req.urgency] ?? urgencyStyles.normal;
+            return (
+              <article
+                key={req.id}
+                className="group relative grid gap-5 p-6 transition hover:bg-slate-50 lg:grid-cols-[1fr_auto]"
+              >
+                <span
+                  className={`absolute left-0 top-6 bottom-6 w-1 rounded-r-full ${u.bar}`}
+                />
+
+                <div className="pl-3">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <div
+                      className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-base font-black text-red-600 ring-1 ring-red-200"
+                      style={FONT_HEAD}
+                    >
+                      {req.blood_type}
+                    </div>
+                    <div>
+                      <p className="text-base font-black text-slate-900" style={FONT_HEAD}>
+                        Request #{req.id}
+                        <span className="ml-2 text-sm font-bold text-slate-500">
+                          · {req.units} units
+                        </span>
+                      </p>
+                      <p className="mt-0.5 text-sm text-slate-600">
+                        {req.hospital || "Hospital not set"} — {req.location || "Location not provided"}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <span
+                      className={`rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide ${
+                        statusStyles[req.status] ?? statusStyles.pending
+                      }`}
+                    >
+                      {statusLabels[req.status] ?? req.status}
+                    </span>
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wide ${u.pill}`}
+                    >
+                      <span className={`h-1.5 w-1.5 rounded-full ${u.dot}`} />
+                      {req.urgency}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 pl-3 lg:justify-end">
+                  <ActionBtn
+                    disabled={actionKey === `${req.id}-status` || req.status !== "pending"}
+                    onClick={() => updateRequest(req.id, { status: "approved" })}
+                  >
+                    Approve
+                  </ActionBtn>
+                  <ActionBtn
+                    disabled={actionKey === `${req.id}-status` || req.status !== "approved"}
+                    onClick={() => updateRequest(req.id, { status: "in_progress" })}
+                  >
+                    Start
+                  </ActionBtn>
+                  <ActionBtn
+                    disabled={actionKey === `${req.id}-status` || req.status !== "in_progress"}
+                    onClick={() => updateRequest(req.id, { status: "completed" })}
+                  >
+                    Complete
+                  </ActionBtn>
+                  <ActionBtn
+                    variant="warn"
+                    disabled={actionKey === `${req.id}-urgency` || req.urgency === "critical"}
+                    onClick={() => updateRequest(req.id, { urgency: "critical" })}
+                  >
+                    Mark Critical
+                  </ActionBtn>
+                  <ActionBtn
+                    variant="primary"
+                    disabled={actionKey === `${req.id}-matches`}
+                    onClick={() => findMatches(req.id)}
+                  >
+                    Find Donors
+                  </ActionBtn>
+                </div>
+              </article>
+            );
+          })}
+
+          {filtered2.length === 0 && (
+            <div className="p-10 text-center">
+              <p className="text-sm font-semibold text-slate-500">
+                No requests match this view.
+              </p>
+            </div>
           )}
         </div>
       </div>
     </section>
   );
 }
+
+/* ── primitives ── */
+function Stat({
+  label,
+  value,
+  accent,
+}: {
+  label: string;
+  value: number | string;
+  accent?: boolean;
+}) {
+  return (
+    <div
+      className={`rounded-2xl p-4 ring-1 ${
+        accent
+          ? "bg-red-600/15 ring-red-500/30"
+          : "bg-white/5 ring-white/10"
+      }`}
+    >
+      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300">
+        {label}
+      </p>
+      <p
+        className="mt-2 text-2xl font-black text-white"
+        style={{ fontFamily: "Urbanist, system-ui, sans-serif" }}
+      >
+        {value}
+      </p>
+    </div>
+  );
+}
+
+function ActionBtn({
+  children,
+  onClick,
+  disabled,
+  variant = "default",
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  disabled?: boolean;
+  variant?: "default" | "primary" | "warn";
+}) {
+  const base =
+    "rounded-xl px-3.5 py-2 text-xs font-bold transition disabled:opacity-40 disabled:cursor-not-allowed";
+  const map: Record<typeof variant, string> = {
+    default:
+      "bg-white text-slate-800 ring-1 ring-slate-200 hover:bg-slate-900 hover:text-white hover:ring-slate-900",
+    primary: "bg-slate-900 text-white hover:bg-red-600",
+    warn: "bg-amber-100 text-amber-900 ring-1 ring-amber-200 hover:bg-amber-200",
+  };
+
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`${base} ${map[variant]}`}
+    >
+      {children}
+    </button>
+  );
+}
+

@@ -1,4 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@600;700;800;900&family=Epilogue:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap");
+
+:root {
+  --ll-bg: #f8fafc;
+  --ll-surface: #f1f5f9;
+  --ll-line: #e2e8f0;
+  --ll-ink: #0f172a;
+  --ll-muted: #64748b;
+  --ll-accent: #ef4444;
+}
+
+.font-display {
+  font-family: "Urbanist", system-ui, sans-serif;
+}
+.font-body {
+  font-family: "Epilogue", system-ui, sans-serif;
+}
 
 @tailwind base;
 @tailwind components;
@@ -28,9 +45,14 @@ html {
 }
 
 body {
-  background: linear-gradient(180deg, #ffffff 0%, var(--c-bg) 38%, #f2f6fa 100%);
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    var(--c-bg) 38%,
+    #f2f6fa 100%
+  );
   color: var(--c-ink);
-  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-family: "Epilogue", "Segoe UI", sans-serif;
 }
 
 #root {
@@ -41,7 +63,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Sora", "Manrope", sans-serif;
+  font-family: "Urbanist", "Epilogue", sans-serif;
   letter-spacing: 0;
 }
 
@@ -216,7 +238,10 @@ select:focus-visible {
   padding: 0.86rem 0.95rem;
   color: var(--c-ink);
   outline: none;
-  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
 }
 
 .auth-input:focus {
@@ -231,7 +256,10 @@ select:focus-visible {
   color: #fff;
   font-weight: 700;
   padding: 0.95rem 1.1rem;
-  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    filter 160ms ease;
 }
 
 .auth-button:disabled,
@@ -283,7 +311,10 @@ select:focus-visible {
   color: var(--c-ink);
   font-weight: 700;
   padding: 0.75rem 1rem;
-  transition: transform 160ms ease, filter 160ms ease, background-color 160ms ease;
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    background-color 160ms ease;
 }
 
 .btn-secondary:hover {
@@ -361,7 +392,11 @@ select:focus-visible {
 
 .location-map-shell {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0) 22%),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.58) 0%,
+      rgba(255, 255, 255, 0) 22%
+    ),
     #f4f8fb;
 }
 
@@ -398,8 +433,16 @@ select:focus-visible {
 
 .location-map-overlay {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0) 24%),
-    radial-gradient(circle at center, rgba(255, 255, 255, 0) 52%, rgba(255, 245, 240, 0.42) 100%);
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.48) 0%,
+      rgba(255, 255, 255, 0) 24%
+    ),
+    radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0) 52%,
+      rgba(255, 245, 240, 0.42) 100%
+    );
 }
 
 .location-map-marker {
@@ -423,7 +466,9 @@ select:focus-visible {
   border-radius: 0.65rem;
   color: var(--c-muted);
   font-weight: 800;
-  transition: background-color 160ms ease, color 160ms ease;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
 }
 
 .nav-link:hover,
@@ -521,6 +566,50 @@ select:focus-visible {
     transform: scale(1.35);
     opacity: 0.72;
   }
+}
+
+@keyframes ll-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ll-stagger {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ll-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.ll-animate-in {
+  animation: ll-fade-in 520ms cubic-bezier(0.21, 0.8, 0.28, 1) both;
+}
+
+.ll-animate-stagger {
+  animation: ll-stagger 520ms cubic-bezier(0.21, 0.8, 0.28, 1) both;
+}
+
+.ll-animate-float {
+  animation: ll-float 4.2s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,0 +1,3022 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/aix-ppc64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/android-arm",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/android-arm64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/android-x64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/darwin-arm64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/darwin-x64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/freebsd-arm64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/freebsd-x64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-arm",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-arm64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-ia32",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-loong64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-mips64el",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-ppc64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-riscv64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-s390x",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-x64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/netbsd-arm64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/netbsd-x64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/openbsd-arm64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/openbsd-x64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/openharmony-arm64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/sunos-x64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/win32-arm64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/win32-ia32",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/win32-x64",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@socket.io/component-emitter",
+      "version": "3.1.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/bcryptjs",
+      "version": "2.4.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/body-parser",
+      "version": "1.19.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/connect",
+      "version": "3.4.38",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/cors",
+      "version": "2.8.19",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/express",
+      "version": "4.17.25",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/express-serve-static-core",
+      "version": "4.19.8",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/http-errors",
+      "version": "2.0.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/jsonwebtoken",
+      "version": "9.0.10",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/mime",
+      "version": "1.3.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/ms",
+      "version": "2.1.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/node",
+      "version": "22.19.17",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/qs",
+      "version": "6.15.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/range-parser",
+      "version": "1.2.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/send",
+      "version": "1.2.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/serve-static",
+      "version": "1.15.10",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/ws",
+      "version": "8.18.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "accepts",
+      "version": "1.3.8",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "array-flatten",
+      "version": "1.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "base64id",
+      "version": "2.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "bcryptjs",
+      "version": "2.4.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "body-parser",
+      "version": "1.20.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "buffer-equal-constant-time",
+      "version": "1.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "bytes",
+      "version": "3.1.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "call-bind-apply-helpers",
+      "version": "1.0.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "call-bound",
+      "version": "1.0.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "content-disposition",
+      "version": "0.5.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "content-type",
+      "version": "1.0.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "cookie",
+      "version": "0.7.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "cookie-signature",
+      "version": "1.0.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "cors",
+      "version": "2.8.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "debug",
+      "version": "2.6.9",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "depd",
+      "version": "2.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "destroy",
+      "version": "1.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "dotenv",
+      "version": "16.6.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "dunder-proto",
+      "version": "1.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "ecdsa-sig-formatter",
+      "version": "1.0.11",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "ee-first",
+      "version": "1.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "encodeurl",
+      "version": "2.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "engine.io",
+      "version": "6.6.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "engine.io-parser",
+      "version": "5.2.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "es-define-property",
+      "version": "1.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "es-errors",
+      "version": "1.3.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "es-object-atoms",
+      "version": "1.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "esbuild",
+      "version": "0.27.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "escape-html",
+      "version": "1.0.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "etag",
+      "version": "1.8.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "express",
+      "version": "4.22.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "finalhandler",
+      "version": "1.3.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "forwarded",
+      "version": "0.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "fresh",
+      "version": "0.5.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "fsevents",
+      "version": "2.3.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "function-bind",
+      "version": "1.1.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "get-intrinsic",
+      "version": "1.3.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "get-proto",
+      "version": "1.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "get-tsconfig",
+      "version": "4.14.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "gopd",
+      "version": "1.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "has-symbols",
+      "version": "1.1.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "hasown",
+      "version": "2.0.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "http-errors",
+      "version": "2.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "iconv-lite",
+      "version": "0.4.24",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "inherits",
+      "version": "2.0.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "ipaddr.js",
+      "version": "1.9.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "jsonwebtoken",
+      "version": "9.0.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "jwa",
+      "version": "2.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "jws",
+      "version": "4.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "lodash.includes",
+      "version": "4.3.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "lodash.isboolean",
+      "version": "3.0.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "lodash.isinteger",
+      "version": "4.0.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "lodash.isnumber",
+      "version": "3.0.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "lodash.isplainobject",
+      "version": "4.0.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "lodash.isstring",
+      "version": "4.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "lodash.once",
+      "version": "4.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "math-intrinsics",
+      "version": "1.1.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "media-typer",
+      "version": "0.3.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "merge-descriptors",
+      "version": "1.0.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "methods",
+      "version": "1.1.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "mime",
+      "version": "1.6.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "mime-db",
+      "version": "1.52.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "mime-types",
+      "version": "2.1.35",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "ms",
+      "version": "2.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "negotiator",
+      "version": "0.6.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "object-assign",
+      "version": "4.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "object-inspect",
+      "version": "1.13.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "on-finished",
+      "version": "2.4.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "parseurl",
+      "version": "1.3.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "path-to-regexp",
+      "version": "0.1.13",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "pg",
+      "version": "8.20.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "pg-cloudflare",
+      "version": "1.3.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "pg-connection-string",
+      "version": "2.12.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "pg-int8",
+      "version": "1.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "pg-pool",
+      "version": "3.13.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "pg-protocol",
+      "version": "1.13.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "pg-types",
+      "version": "2.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "pgpass",
+      "version": "1.0.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "postgres-array",
+      "version": "2.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "postgres-bytea",
+      "version": "1.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "postgres-date",
+      "version": "1.0.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "postgres-interval",
+      "version": "1.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "proxy-addr",
+      "version": "2.0.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "qs",
+      "version": "6.14.2",
+      "vulnerabilities": [
+        {
+          "id": "GHSA-q8mj-m7cp-5q26",
+          "summary": "No summary available",
+          "details": "",
+          "severity": "medium",
+          "aliases": [],
+          "references": [],
+          "modifiedAt": "2026-05-26T17:14:20.672533Z"
+        }
+      ],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "range-parser",
+      "version": "1.2.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "raw-body",
+      "version": "2.5.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "resolve-pkg-maps",
+      "version": "1.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "safe-buffer",
+      "version": "5.2.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "safer-buffer",
+      "version": "2.1.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "semver",
+      "version": "7.7.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "send",
+      "version": "0.19.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "serve-static",
+      "version": "1.16.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "setprototypeof",
+      "version": "1.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "side-channel",
+      "version": "1.1.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "side-channel-list",
+      "version": "1.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "side-channel-map",
+      "version": "1.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "side-channel-weakmap",
+      "version": "1.0.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "socket.io",
+      "version": "4.8.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "socket.io-adapter",
+      "version": "2.5.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "socket.io-parser",
+      "version": "4.2.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "split2",
+      "version": "4.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "statuses",
+      "version": "2.0.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "toidentifier",
+      "version": "1.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "tsx",
+      "version": "4.21.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "type-is",
+      "version": "1.6.18",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "typescript",
+      "version": "5.9.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "undici-types",
+      "version": "6.21.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "unpipe",
+      "version": "1.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "utils-merge",
+      "version": "1.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "vary",
+      "version": "1.1.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "ws",
+      "version": "8.18.3",
+      "vulnerabilities": [
+        {
+          "id": "GHSA-58qx-3vcg-4xpx",
+          "summary": "No summary available",
+          "details": "",
+          "severity": "medium",
+          "aliases": [],
+          "references": [],
+          "modifiedAt": "2026-05-20T14:14:16.832659Z"
+        }
+      ],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "xtend",
+      "version": "4.0.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "zod",
+      "version": "3.25.76",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@alloc/quick-lru",
+      "version": "5.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/code-frame",
+      "version": "7.29.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/compat-data",
+      "version": "7.29.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/core",
+      "version": "7.29.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/generator",
+      "version": "7.29.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/helper-compilation-targets",
+      "version": "7.28.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/helper-globals",
+      "version": "7.28.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/helper-module-imports",
+      "version": "7.28.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/helper-module-transforms",
+      "version": "7.28.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/helper-plugin-utils",
+      "version": "7.28.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/helper-string-parser",
+      "version": "7.27.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/helper-validator-identifier",
+      "version": "7.28.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/helper-validator-option",
+      "version": "7.27.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/helpers",
+      "version": "7.29.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/parser",
+      "version": "7.29.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/plugin-transform-react-jsx-self",
+      "version": "7.27.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/plugin-transform-react-jsx-source",
+      "version": "7.27.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/template",
+      "version": "7.28.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/traverse",
+      "version": "7.29.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@babel/types",
+      "version": "7.29.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@capacitor/android",
+      "version": "6.2.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@capacitor/cli",
+      "version": "6.2.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@capacitor/core",
+      "version": "6.2.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/aix-ppc64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/android-arm",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/android-arm64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/android-x64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/darwin-arm64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/darwin-x64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/freebsd-arm64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/freebsd-x64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-arm",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-arm64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-ia32",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-loong64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-mips64el",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-ppc64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-riscv64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-s390x",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/linux-x64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/netbsd-x64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/openbsd-x64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/sunos-x64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/win32-arm64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/win32-ia32",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@esbuild/win32-x64",
+      "version": "0.21.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@ionic/cli-framework-output",
+      "version": "2.2.8",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@ionic/utils-array",
+      "version": "2.1.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@ionic/utils-fs",
+      "version": "3.1.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@ionic/utils-object",
+      "version": "2.1.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@ionic/utils-process",
+      "version": "2.1.10",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@ionic/utils-stream",
+      "version": "3.1.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@ionic/utils-subprocess",
+      "version": "2.1.11",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@ionic/utils-terminal",
+      "version": "2.3.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@jridgewell/gen-mapping",
+      "version": "0.3.13",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@jridgewell/remapping",
+      "version": "2.3.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@jridgewell/resolve-uri",
+      "version": "3.1.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@jridgewell/sourcemap-codec",
+      "version": "1.5.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@jridgewell/trace-mapping",
+      "version": "0.3.31",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@nodelib/fs.scandir",
+      "version": "2.1.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@nodelib/fs.stat",
+      "version": "2.0.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@nodelib/fs.walk",
+      "version": "1.2.8",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@remix-run/router",
+      "version": "1.23.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rolldown/pluginutils",
+      "version": "1.0.0-beta.27",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-android-arm-eabi",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-android-arm64",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-darwin-arm64",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-darwin-x64",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-freebsd-arm64",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-freebsd-x64",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-arm-gnueabihf",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-arm-musleabihf",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-arm64-gnu",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-arm64-musl",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-loong64-gnu",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-loong64-musl",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-ppc64-gnu",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-ppc64-musl",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-riscv64-gnu",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-riscv64-musl",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-s390x-gnu",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-x64-gnu",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-linux-x64-musl",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-openbsd-x64",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-openharmony-arm64",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-win32-arm64-msvc",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-win32-ia32-msvc",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-win32-x64-gnu",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@rollup/rollup-win32-x64-msvc",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/babel__core",
+      "version": "7.20.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/babel__generator",
+      "version": "7.27.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/babel__template",
+      "version": "7.4.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/babel__traverse",
+      "version": "7.28.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/estree",
+      "version": "1.0.8",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/fs-extra",
+      "version": "8.1.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/geojson",
+      "version": "7946.0.16",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/leaflet",
+      "version": "1.9.21",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/node",
+      "version": "25.9.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/prop-types",
+      "version": "15.7.15",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/react",
+      "version": "18.3.28",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/react-dom",
+      "version": "18.3.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@types/slice-ansi",
+      "version": "4.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@vitejs/plugin-react",
+      "version": "4.7.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "@xmldom/xmldom",
+      "version": "0.9.10",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "ansi-regex",
+      "version": "5.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "ansi-styles",
+      "version": "4.3.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "any-promise",
+      "version": "1.3.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "anymatch",
+      "version": "3.1.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "arg",
+      "version": "5.0.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "astral-regex",
+      "version": "2.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "at-least-node",
+      "version": "1.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "autoprefixer",
+      "version": "10.5.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "balanced-match",
+      "version": "1.0.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "base64-js",
+      "version": "1.5.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "baseline-browser-mapping",
+      "version": "2.10.27",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "big-integer",
+      "version": "1.6.52",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "binary-extensions",
+      "version": "2.3.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "bplist-parser",
+      "version": "0.3.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "brace-expansion",
+      "version": "2.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "braces",
+      "version": "3.0.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "browserslist",
+      "version": "4.28.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "buffer-crc32",
+      "version": "0.2.13",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "camelcase-css",
+      "version": "2.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "caniuse-lite",
+      "version": "1.0.30001791",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "chokidar",
+      "version": "3.6.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "chownr",
+      "version": "2.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "color-convert",
+      "version": "2.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "color-name",
+      "version": "1.1.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "commander",
+      "version": "4.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "convert-source-map",
+      "version": "2.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "cross-spawn",
+      "version": "7.0.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "cssesc",
+      "version": "3.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "csstype",
+      "version": "3.2.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "debug",
+      "version": "4.4.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "define-lazy-prop",
+      "version": "2.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "didyoumean",
+      "version": "1.2.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "dlv",
+      "version": "1.1.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "electron-to-chromium",
+      "version": "1.5.349",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "elementtree",
+      "version": "0.1.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "emoji-regex",
+      "version": "8.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "engine.io-client",
+      "version": "6.6.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "env-paths",
+      "version": "2.2.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "esbuild",
+      "version": "0.21.5",
+      "vulnerabilities": [
+        {
+          "id": "GHSA-67mh-4wv8-2f99",
+          "summary": "No summary available",
+          "details": "",
+          "severity": "medium",
+          "aliases": [],
+          "references": [],
+          "modifiedAt": "2026-02-04T02:50:58.022803Z"
+        }
+      ],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "escalade",
+      "version": "3.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "fast-glob",
+      "version": "3.3.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "fastq",
+      "version": "1.20.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "fd-slicer",
+      "version": "1.1.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "fill-range",
+      "version": "7.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "fraction.js",
+      "version": "5.3.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "fs-extra",
+      "version": "9.1.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "fs-minipass",
+      "version": "2.1.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "fs.realpath",
+      "version": "1.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "gensync",
+      "version": "1.0.0-beta.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "glob",
+      "version": "9.3.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "glob-parent",
+      "version": "6.0.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "graceful-fs",
+      "version": "4.2.11",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "ini",
+      "version": "4.1.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "is-binary-path",
+      "version": "2.1.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "is-core-module",
+      "version": "2.16.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "is-docker",
+      "version": "2.2.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "is-extglob",
+      "version": "2.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "is-fullwidth-code-point",
+      "version": "3.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "is-glob",
+      "version": "4.0.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "is-number",
+      "version": "7.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "is-wsl",
+      "version": "2.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "isexe",
+      "version": "2.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "jiti",
+      "version": "1.21.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "js-tokens",
+      "version": "4.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "jsesc",
+      "version": "3.1.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "json5",
+      "version": "2.2.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "jsonfile",
+      "version": "6.2.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "kleur",
+      "version": "4.1.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "leaflet",
+      "version": "1.9.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "lilconfig",
+      "version": "3.1.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "lines-and-columns",
+      "version": "1.2.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "loose-envify",
+      "version": "1.4.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "lru-cache",
+      "version": "5.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "merge2",
+      "version": "1.4.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "micromatch",
+      "version": "4.0.8",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "minimatch",
+      "version": "8.0.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "minipass",
+      "version": "4.2.8",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "minizlib",
+      "version": "2.1.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "mkdirp",
+      "version": "1.0.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "ms",
+      "version": "2.1.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "mz",
+      "version": "2.7.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "nanoid",
+      "version": "3.3.12",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "native-run",
+      "version": "2.0.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "node-releases",
+      "version": "2.0.38",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "normalize-path",
+      "version": "3.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "object-hash",
+      "version": "3.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "open",
+      "version": "8.4.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "path-key",
+      "version": "3.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "path-parse",
+      "version": "1.0.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "path-scurry",
+      "version": "1.11.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "pend",
+      "version": "1.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "picocolors",
+      "version": "1.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "picomatch",
+      "version": "2.3.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "pify",
+      "version": "2.3.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "pirates",
+      "version": "4.0.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "plist",
+      "version": "3.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "postcss",
+      "version": "8.5.13",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "postcss-import",
+      "version": "15.1.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "postcss-js",
+      "version": "4.1.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "postcss-load-config",
+      "version": "6.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "postcss-nested",
+      "version": "6.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "postcss-selector-parser",
+      "version": "6.1.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "postcss-value-parser",
+      "version": "4.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "prompts",
+      "version": "2.4.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "queue-microtask",
+      "version": "1.2.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "react",
+      "version": "18.3.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "react-dom",
+      "version": "18.3.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "react-refresh",
+      "version": "0.17.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "react-router",
+      "version": "6.30.3",
+      "vulnerabilities": [
+        {
+          "id": "GHSA-2j2x-hqr9-3h42",
+          "summary": "No summary available",
+          "details": "",
+          "severity": "medium",
+          "aliases": [],
+          "references": [],
+          "modifiedAt": "2026-06-03T21:00:07.966230Z"
+        }
+      ],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "react-router-dom",
+      "version": "6.30.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "read-cache",
+      "version": "1.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "readable-stream",
+      "version": "3.6.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "readdirp",
+      "version": "3.6.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "resolve",
+      "version": "1.22.12",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "reusify",
+      "version": "1.1.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "rimraf",
+      "version": "4.4.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "rollup",
+      "version": "4.60.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "run-parallel",
+      "version": "1.2.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "sax",
+      "version": "1.1.4",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "scheduler",
+      "version": "0.23.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "semver",
+      "version": "6.3.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "shebang-command",
+      "version": "2.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "shebang-regex",
+      "version": "3.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "signal-exit",
+      "version": "3.0.7",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "sisteransi",
+      "version": "1.0.5",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "slice-ansi",
+      "version": "4.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "socket.io-client",
+      "version": "4.8.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "source-map-js",
+      "version": "1.2.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "string_decoder",
+      "version": "1.3.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "string-width",
+      "version": "4.2.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "strip-ansi",
+      "version": "6.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "sucrase",
+      "version": "3.35.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "supports-preserve-symlinks-flag",
+      "version": "1.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "tailwindcss",
+      "version": "3.4.19",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "tar",
+      "version": "6.2.1",
+      "vulnerabilities": [
+        {
+          "id": "GHSA-34x7-hfp2-rc4v",
+          "summary": "No summary available",
+          "details": "",
+          "severity": "medium",
+          "aliases": [],
+          "references": [],
+          "modifiedAt": "2026-02-04T03:15:55.338132Z"
+        },
+        {
+          "id": "GHSA-83g3-92jg-28cx",
+          "summary": "No summary available",
+          "details": "",
+          "severity": "medium",
+          "aliases": [],
+          "references": [],
+          "modifiedAt": "2026-02-20T17:04:10.056655Z"
+        },
+        {
+          "id": "GHSA-8qq5-rm4j-mr97",
+          "summary": "No summary available",
+          "details": "",
+          "severity": "medium",
+          "aliases": [],
+          "references": [],
+          "modifiedAt": "2026-02-22T23:20:34.076378Z"
+        },
+        {
+          "id": "GHSA-9ppj-qmqm-q256",
+          "summary": "No summary available",
+          "details": "",
+          "severity": "medium",
+          "aliases": [],
+          "references": [],
+          "modifiedAt": "2026-03-13T04:44:43.038430Z"
+        },
+        {
+          "id": "GHSA-qffp-2rhf-9h96",
+          "summary": "No summary available",
+          "details": "",
+          "severity": "medium",
+          "aliases": [],
+          "references": [],
+          "modifiedAt": "2026-03-10T10:43:54.597657Z"
+        },
+        {
+          "id": "GHSA-r6q2-hw4h-h46w",
+          "summary": "No summary available",
+          "details": "",
+          "severity": "medium",
+          "aliases": [],
+          "references": [],
+          "modifiedAt": "2026-03-16T14:31:36.090978Z"
+        }
+      ],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "thenify",
+      "version": "3.3.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "thenify-all",
+      "version": "1.6.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "through2",
+      "version": "4.0.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "tinyglobby",
+      "version": "0.2.16",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "to-regex-range",
+      "version": "5.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "tree-kill",
+      "version": "1.2.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "ts-interface-checker",
+      "version": "0.1.13",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "tslib",
+      "version": "2.8.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "undici-types",
+      "version": "7.24.6",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "universalify",
+      "version": "2.0.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "untildify",
+      "version": "4.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "update-browserslist-db",
+      "version": "1.2.3",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "util-deprecate",
+      "version": "1.0.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "vite",
+      "version": "5.4.21",
+      "vulnerabilities": [
+        {
+          "id": "GHSA-4w7w-66w2-5vf9",
+          "summary": "No summary available",
+          "details": "",
+          "severity": "medium",
+          "aliases": [],
+          "references": [],
+          "modifiedAt": "2026-04-09T14:59:24.646487Z"
+        }
+      ],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "which",
+      "version": "2.0.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "wrap-ansi",
+      "version": "7.0.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "xml2js",
+      "version": "0.5.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "xmlbuilder",
+      "version": "15.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "xmlhttprequest-ssl",
+      "version": "2.1.2",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "yallist",
+      "version": "3.1.1",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    },
+    {
+      "ecosystem": "npm",
+      "name": "yauzl",
+      "version": "2.10.0",
+      "vulnerabilities": [],
+      "queriedAt": "2026-06-08T10:30:00.038Z"
+    }
+  ]
+}
