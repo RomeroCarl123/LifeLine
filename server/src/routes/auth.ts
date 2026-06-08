@@ -1,4 +1,4 @@
-mimport express from "express";
+import express from "express";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { pool } from "../db.js";
