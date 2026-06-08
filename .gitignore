@@ -6,5 +6,6 @@ dist/
 **/.env.*
 *.log
 .vscan-findings.json
-.vscan
+.vscan/
 .gitignore
+
