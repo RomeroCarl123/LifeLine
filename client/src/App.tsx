@@ -14,10 +14,11 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 import Dashboard from "./pages/Dashboard";
-import AdminDashboard from "./pages/AdminDashboard";
+
 import DonorDashboard from "./pages/DonorDashboard";
 
 import RequesterDashboard from "./pages/RequesterDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 
 import type { SessionUser } from "./api";
 
@@ -85,22 +86,17 @@ function App() {
             </AppShell>
           }
         />
+        <Route
+          path="/admin-login"
+          element={<Navigate to="/login" replace />}
+        />
 
         <Route element={<SaaSLayout user={user} onLogout={authApi.onLogout} />}>
           <Route
             path="/dashboard"
             element={<Dashboard user={user} token={token} />}
           />
-          <Route
-            path="/admin/dashboard"
-            element={
-              token && user?.role === "admin" ? (
-                <AdminDashboard token={token} />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
+
           <Route
             path="/donor/dashboard"
             element={
@@ -116,6 +112,16 @@ function App() {
             element={
               token ? (
                 <RequesterDashboard token={token} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/admin/dashboard"
+            element={
+              token && user?.role === "admin" ? (
+                <AdminDashboard token={token} />
               ) : (
                 <Navigate to="/login" />
               )

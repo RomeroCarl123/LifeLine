@@ -35,7 +35,7 @@ const registerSchema = z
     name: nameSchema,
     email: z.string().trim().email().max(120),
     password: passwordSchema,
-    role: z.enum(["donor", "requester"]),
+    role: z.enum(["donor", "requester", "admin"]),
     bloodType: z.enum(bloodTypes).optional(),
     location: locationSchema.optional(),
     availability: z.boolean().optional(),
@@ -96,12 +96,6 @@ const loginSchema = z.object({
   password: z.string().min(1),
 });
 
-// Admin secret access key is no longer required.
-// Kept schema name for compatibility, but accessKey is optional.
-const adminLoginSchema = loginSchema.extend({
-  accessKey: z.string().trim().min(1).optional(),
-});
-
 router.post("/login", async (req, res) => {
   const parsed = loginSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json(parsed.error.flatten());
@@ -127,8 +121,9 @@ router.post("/login", async (req, res) => {
   });
 });
 
-router.post("/admin/login", async (req, res) => {
-  const parsed = adminLoginSchema.safeParse(req.body);
+// Admin only login endpoint
+router.post("/admin-login", async (req, res) => {
+  const parsed = loginSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json(parsed.error.flatten());
 
   const { email, password } = parsed.data;
@@ -137,27 +132,18 @@ router.post("/admin/login", async (req, res) => {
     "SELECT id, email, role, password_hash FROM users WHERE email = $1",
     [email],
   );
+  if (!result.rowCount)
+    return res.status(401).json({ message: "Invalid credentials" });
 
-  let user = result.rows[0];
-
-  if (user && user.role !== "admin") {
-    return res.status(409).json({
-      message: "This email is already registered for a non-admin account",
-    });
+  const user = result.rows[0];
+  
+  // Only allow admin accounts here
+  if (user.role !== "admin") {
+    return res.status(403).json({ message: "This endpoint is for admin accounts only." });
   }
 
-  if (user) {
-    const ok = await bcrypt.compare(password, user.password_hash);
-    if (!ok)
-      return res.status(401).json({ message: "Invalid admin credentials" });
-  } else {
-    const passwordHash = await bcrypt.hash(password, 10);
-    const created = await pool.query(
-      "INSERT INTO users (name, email, password_hash, role) VALUES ($1, $2, $3, 'admin') RETURNING id, email, role",
-      ["Admin", email, passwordHash],
-    );
-    user = created.rows[0];
-  }
+  const ok = await bcrypt.compare(password, user.password_hash);
+  if (!ok) return res.status(401).json({ message: "Invalid credentials" });
 
   const token = signToken({ id: user.id, role: user.role, email: user.email });
   return res.json({

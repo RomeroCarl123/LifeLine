@@ -20,6 +20,7 @@ export default function Register({ onAuth }: Props) {
     password: "",
     bloodType: "O+",
     location: "",
+    availability: true,
   });
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -31,7 +32,7 @@ export default function Register({ onAuth }: Props) {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const requested = params.get("role");
-    if (requested === "donor" || requested === "requester") setRole(requested);
+    if (requested === "donor" || requested === "requester" || requested === "admin") setRole(requested);
   }, [location.search]);
 
   const submit = async (e: FormEvent) => {
@@ -49,7 +50,7 @@ export default function Register({ onAuth }: Props) {
       if (role === "donor") {
         payload.bloodType = form.bloodType;
         payload.location = form.location;
-        payload.availability = true;
+        payload.availability = form.availability;
       }
 
       const data = await api<{ token: string; user: any }>("/auth/register", {
@@ -99,8 +100,8 @@ export default function Register({ onAuth }: Props) {
             </div>
 
             {/* Role toggle */}
-            <div className="mt-6 grid grid-cols-2 gap-2 rounded-xl border border-[var(--ll-line,#e2e8f0)] bg-white p-1.5">
-              {(["donor", "requester"] as Role[]).map((r) => (
+            <div className="mt-6 grid grid-cols-3 gap-2 rounded-xl border border-[var(--ll-line,#e2e8f0)] bg-white p-1.5">
+              {(["donor", "requester", "admin"] as Role[]).map((r) => (
                 <button
                   key={r}
                   type="button"
@@ -111,7 +112,7 @@ export default function Register({ onAuth }: Props) {
                       : "text-[var(--ll-muted,#64748b)] hover:bg-white"
                   }`}
                 >
-                  {r === "donor" ? "I'm a donor" : "I need blood"}
+                  {r === "donor" ? "I'm a donor" : r === "requester" ? "I need blood" : "Admin"}
                 </button>
               ))}
             </div>
@@ -177,36 +178,60 @@ export default function Register({ onAuth }: Props) {
               </Field>
 
               {role === "donor" && (
-                <div className="grid grid-cols-2 gap-3">
-                  <Field label="Blood type">
-                    <select
-                      value={form.bloodType}
-                      onChange={(e) =>
-                        setForm({ ...form, bloodType: e.target.value })
-                      }
-                      className="auth-input"
-                    >
-                      {bloodTypes.map((t) => (
-                        <option key={t} value={t}>
-                          {t}
-                        </option>
-                      ))}
-                    </select>
-                  </Field>
-                  <Field label="Location">
+                <div className="space-y-3">
+                  <div className="grid grid-cols-2 gap-3">
+                    <Field label="Blood type">
+                      <select
+                        value={form.bloodType}
+                        onChange={(e) =>
+                          setForm({ ...form, bloodType: e.target.value })
+                        }
+                        className="auth-input"
+                      >
+                        {bloodTypes.map((t) => (
+                          <option key={t} value={t}>
+                            {t}
+                          </option>
+                        ))}
+                      </select>
+                    </Field>
+                    <Field label="Location">
+                      <input
+                        value={form.location}
+                        onChange={(e) =>
+                          setForm({ ...form, location: e.target.value })
+                        }
+                        required
+                        minLength={2}
+                        maxLength={120}
+                        pattern="[A-Za-z0-9\s,.'-]+"
+                        className="auth-input"
+                        placeholder="City, area"
+                      />
+                    </Field>
+                  </div>
+
+                  {/* Availability option */}
+                  <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-[var(--ll-line,#e2e8f0)] bg-white px-4 py-3">
                     <input
-                      value={form.location}
+                      type="checkbox"
+                      checked={form.availability}
                       onChange={(e) =>
-                        setForm({ ...form, location: e.target.value })
+                        setForm({ ...form, availability: e.target.checked })
                       }
-                      required
-                      minLength={2}
-                      maxLength={120}
-                      pattern="[A-Za-z0-9\s,.'-]+"
-                      className="auth-input"
-                      placeholder="City, area"
+                      className="mt-1 h-4 w-4 accent-[var(--ll-accent,#ef4444)]"
                     />
-                  </Field>
+                    <span>
+                      <span className="block text-xs font-bold uppercase tracking-[0.16em] text-[var(--ll-muted,#64748b)]">
+                        I’m available
+                      </span>
+                      <span className="mt-1 block text-sm text-[var(--ll-ink,#0f172a)]">
+                        {form.availability
+                          ? "You’ll be shown as available to donate."
+                          : "You’ll be registered, but not shown as available yet."}
+                      </span>
+                    </span>
+                  </label>
                 </div>
               )}
 

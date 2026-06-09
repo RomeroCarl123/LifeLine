@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { api } from "../api";
 
@@ -22,8 +22,8 @@ export default function Login({ onAuth }: Props) {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const navigate = useNavigate();
+
   const location = useLocation();
   const fromRegister = location.state?.from === "register";
 
@@ -31,11 +31,13 @@ export default function Login({ onAuth }: Props) {
     e.preventDefault();
     setError("");
     setIsSubmitting(true);
+
     try {
       const data = await api<{ token: string; user: any }>("/auth/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
+
       onAuth(data.token, data.user);
       navigate("/dashboard");
     } catch (err) {

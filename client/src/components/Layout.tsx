@@ -15,13 +15,11 @@ export default function Layout({ user, onLogout }: Props) {
   const token = localStorage.getItem("token");
   const roleLabel = user?.role ? `${user.role} workspace` : "Workspace";
   const dashboardTarget =
-    user?.role === "admin"
-      ? "/admin/dashboard"
-      : user?.role === "donor"
-        ? "/donor/dashboard"
-        : user?.role === "requester"
-          ? "/requester/dashboard"
-          : "/dashboard";
+    user?.role === "donor"
+      ? "/donor/dashboard"
+      : user?.role === "requester"
+        ? "/requester/dashboard"
+        : "/dashboard";
 
   return (
     <div className="android-screen min-h-screen text-[var(--c-ink)]">
@@ -58,16 +56,6 @@ export default function Layout({ user, onLogout }: Props) {
             >
               Home
             </NavLink>
-            {user?.role === "admin" && (
-              <NavLink
-                to="/admin/dashboard"
-                className={({ isActive }) =>
-                  `nav-link px-4 py-2 text-sm ${isActive ? "nav-link-active" : ""}`
-                }
-              >
-                Queue
-              </NavLink>
-            )}
           </div>
 
           <div className="order-2 flex flex-wrap items-center gap-2 sm:gap-3 lg:order-3">
