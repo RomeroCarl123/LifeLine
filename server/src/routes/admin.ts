@@ -25,22 +25,14 @@ router.get("/dashboard", async (_req, res) => {
     completedRequests,
     byUrgency,
     byStatus,
-    topLocations,
   ] = await Promise.all([
     pool.query("SELECT COUNT(*)::int AS count FROM donors"),
     pool.query("SELECT COUNT(*)::int AS count FROM donors WHERE availability = true"),
-    pool.query("SELECT COUNT(*)::int AS count FROM requests WHERE status = ANY($1)", [activeStatuses]),
-    pool.query("SELECT COUNT(*)::int AS count FROM requests WHERE urgency IN ('urgent', 'critical') AND status != 'completed'"),
-    pool.query("SELECT COUNT(*)::int AS count FROM requests WHERE status = 'completed'"),
-    pool.query("SELECT urgency, COUNT(*)::int AS count FROM requests GROUP BY urgency ORDER BY urgency"),
-    pool.query("SELECT status, COUNT(*)::int AS count FROM requests GROUP BY status ORDER BY status"),
-    pool.query(
-      `SELECT location, COUNT(*)::int AS count
-       FROM requests
-       GROUP BY location
-       ORDER BY count DESC, location ASC
-       LIMIT 5`
-    ),
+    pool.query("SELECT COUNT(*)::int AS count FROM direct_requests WHERE status = ANY($1)", [activeStatuses]),
+    pool.query("SELECT COUNT(*)::int AS count FROM direct_requests WHERE urgency IN ('urgent', 'critical') AND status != 'completed'"),
+    pool.query("SELECT COUNT(*)::int AS count FROM direct_requests WHERE status = 'completed'"),
+    pool.query("SELECT urgency, COUNT(*)::int AS count FROM direct_requests GROUP BY urgency ORDER BY urgency"),
+    pool.query("SELECT status, COUNT(*)::int AS count FROM direct_requests GROUP BY status ORDER BY status"),
   ]);
 
   return res.json({
@@ -51,7 +43,7 @@ router.get("/dashboard", async (_req, res) => {
     completedRequests: completedRequests.rows[0].count,
     requestsByUrgency: byUrgency.rows,
     requestsByStatus: byStatus.rows,
-    topLocations: topLocations.rows,
+    topLocations: [],
   });
 });
 
@@ -70,7 +62,7 @@ router.patch("/requests/:id", async (req, res) => {
 
   const { status, urgency, assignedDonorId } = parsed.data;
 
-  const existingResult = await pool.query("SELECT * FROM requests WHERE id = $1", [id]);
+  const existingResult = await pool.query("SELECT * FROM direct_requests WHERE id = $1", [id]);
   if (!existingResult.rowCount) return res.status(404).json({ message: "Request not found" });
 
   const current = existingResult.rows[0];
@@ -84,7 +76,7 @@ router.patch("/requests/:id", async (req, res) => {
   }
 
   const updated = await pool.query(
-    `UPDATE requests
+    `UPDATE direct_requests
      SET status = COALESCE($1, status),
          urgency = COALESCE($2, urgency),
          assigned_donor_id = COALESCE($3, assigned_donor_id)

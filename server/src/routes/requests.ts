@@ -60,9 +60,9 @@ router.post(
   const bloodType = donorResult.rows[0]?.blood_type || "O+";
 
   const result = await pool.query(
-    `INSERT INTO direct_requests (requester_id, donor_id, units, request_date, request_time, note, status, blood_type, urgency)
-     VALUES ($1, $2, $3, $4, $5, $6, 'pending', $7, 'normal') RETURNING *`,
-    [req.user!.id, donorId, units, date, time, note || "", bloodType]
+    `INSERT INTO direct_requests (requester_id, donor_id, units, request_date, request_time, note, status)
+     VALUES ($1, $2, $3, $4, $5, $6, 'pending') RETURNING *`,
+    [req.user!.id, donorId, units, date, time, note || ""]
   );
 
     const request = result.rows[0];
@@ -106,11 +106,11 @@ router.post(
     );
 
     const request = result.rows[0];
-    notifyDashboard(["role:admin", "role:donor"], {
+    notifyDashboard(["role:admin"], {
       title: "New blood request",
-      message: `${request.blood_type} needed at ${request.hospital} in ${request.location}.`,
+      message: `${request.blood_type} | ${request.units} units | ${request.hospital} | ${request.location}`,
       type: "request",
-      requestId: request.id,
+      requestId: request.id
     });
     notifyDashboard(`user:${req.user!.id}`, {
       title: "Request submitted",
@@ -149,7 +149,7 @@ router.get("/", authRequired, async (req, res) => {
   }
 
   const where = filters.length ? `WHERE ${filters.join(" AND ")}` : "";
-  const query = `SELECT * FROM requests ${where} ORDER BY created_at DESC`;
+  const query = `SELECT * FROM direct_requests ${where} ORDER BY created_at DESC`;
   const result = await pool.query(query, values);
   return res.json(result.rows);
 });

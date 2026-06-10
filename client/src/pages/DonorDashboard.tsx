@@ -39,6 +39,7 @@ export default function DonorDashboard({ token }: Props) {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isToggling, setIsToggling] = useState(false);
   const [acceptingId, setAcceptingId] = useState<number | null>(null);
+  const [successMessage, setSuccessMessage] = useState("");
 
   // Requests you can respond to are already matched by blood type + location on the backend.
   // So we don't need any donor-side filters here.
@@ -88,7 +89,8 @@ export default function DonorDashboard({ token }: Props) {
     try {
       setAcceptingId(id);
       await api(`/donors/requests/${id}/respond`, { method: "POST" }, token);
-      setMessage(`You accepted request #${id}.`);
+      setSuccessMessage("✓ Request accepted successfully");
+      setTimeout(() => setSuccessMessage(""), 5000);
       await load();
     } catch (err) {
       setMessage((err as Error).message);
@@ -127,8 +129,15 @@ export default function DonorDashboard({ token }: Props) {
       style={{ fontFamily: "'Epilogue', system-ui, sans-serif" }}
     >
       <div className="mx-auto max-w-7xl space-y-8">
-        {/* SPLIT HERO */}
-        <div className="grid overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm lg:grid-cols-[1fr_1.05fr]">
+      {/* Success notification */}
+      {successMessage && (
+        <div className="fixed top-6 right-6 z-50 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4 shadow-lg animate-in slide-in-from-right fade-in duration-300">
+          <p className="text-sm font-medium text-emerald-800">{successMessage}</p>
+        </div>
+      )}
+
+      {/* SPLIT HERO */}
+      <div className="grid overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm lg:grid-cols-[1fr_1.05fr]">
           {/* Dark operational panel */}
           <div className="relative bg-[var(--ll-ink,#0f172a)] p-8 text-white lg:p-10">
             <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.32em] text-slate-400">

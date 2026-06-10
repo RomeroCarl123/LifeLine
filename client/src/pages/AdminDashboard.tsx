@@ -70,6 +70,17 @@ export default function AdminDashboard({ token }: Props) {
     load();
   }, []);
 
+  const transitionMap: Record<string, string[]> = {
+    pending: ["approved"],
+    approved: ["in_progress"],
+    in_progress: ["completed"],
+    completed: [],
+  };
+
+  const canTransition = (currentStatus: string, targetStatus: string) => {
+    return transitionMap[currentStatus]?.includes(targetStatus) ?? false;
+  };
+
   const updateRequest = async (
     id: number,
     patch: Record<string, unknown>,
@@ -82,10 +93,22 @@ export default function AdminDashboard({ token }: Props) {
         token,
       );
       await load();
+    } catch (err) {
+      setError((err as Error).message);
     } finally {
       setActionKey("");
     }
   };
+
+  const [selectedRequest, setSelectedRequest] = useState<any>(null);
+  const [matchedDonors, setMatchedDonors] = useState<any[]>([]);
+  const [scheduleForm, setScheduleForm] = useState({
+    hospital_name: "",
+    schedule_date: new Date().toISOString().split('T')[0],
+    schedule_time: "10:00",
+    notes: "",
+    donor_id: 0
+  });
 
   const findMatches = async (id: number) => {
     setActionKey(`${id}-matches`);
@@ -95,13 +118,25 @@ export default function AdminDashboard({ token }: Props) {
         {},
         token,
       );
-      alert(
-        `Matched donors: ${
-          result.donors
-            .map((d) => `${d.name} (${d.blood_type})`)
-            .join(", ") || "none"
-        }`,
-      );
+      setSelectedRequest(requests.find(r => r.id === id));
+      setMatchedDonors(result.donors);
+    } finally {
+      setActionKey("");
+    }
+  };
+
+  const assignAndSchedule = async () => {
+    if (!selectedRequest || !scheduleForm.donor_id) return;
+    setActionKey(`${selectedRequest.id}-schedule`);
+    try {
+      await api(`/admin/requests/${selectedRequest.id}/schedule`, {
+        method: "POST",
+        body: JSON.stringify(scheduleForm)
+      }, token);
+      
+      setSelectedRequest(null);
+      setScheduleForm({ hospital_name: "", schedule_date: new Date().toISOString().split('T')[0], schedule_time: "10:00", notes: "", donor_id: 0 });
+      await load();
     } finally {
       setActionKey("");
     }
@@ -199,11 +234,12 @@ export default function AdminDashboard({ token }: Props) {
               from one operational surface.
             </p>
 
-            <div className="mt-8 grid grid-cols-3 gap-3">
-              <Stat label="Donors" value={metrics.totalDonors} />
-              <Stat label="Active" value={metrics.activeRequests} accent />
-              <Stat label="Urgent" value={metrics.urgentCases} />
-            </div>
+            <div className="mt-8 grid grid-cols-4 gap-3">
+               <Stat label="Total Donors" value={metrics.totalDonors} />
+               <Stat label="Available" value={metrics.availableDonors} />
+               <Stat label="Active" value={metrics.activeRequests} accent />
+               <Stat label="Urgent" value={metrics.urgentCases} />
+             </div>
           </div>
         </div>
 
@@ -366,25 +402,25 @@ export default function AdminDashboard({ token }: Props) {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2 pl-3 lg:justify-end">
-                  <ActionBtn
-                    disabled={actionKey === `${req.id}-status` || req.status !== "pending"}
-                    onClick={() => updateRequest(req.id, { status: "approved" })}
-                  >
-                    Approve
-                  </ActionBtn>
-                  <ActionBtn
-                    disabled={actionKey === `${req.id}-status` || req.status !== "approved"}
-                    onClick={() => updateRequest(req.id, { status: "in_progress" })}
-                  >
-                    Start
-                  </ActionBtn>
-                  <ActionBtn
-                    disabled={actionKey === `${req.id}-status` || req.status !== "in_progress"}
-                    onClick={() => updateRequest(req.id, { status: "completed" })}
-                  >
-                    Complete
-                  </ActionBtn>
+                 <div className="flex flex-wrap items-center gap-2 pl-3 lg:justify-end">
+                   <ActionBtn
+                     disabled={actionKey.startsWith(`${req.id}-`) || !canTransition(req.status, "approved")}
+                     onClick={() => updateRequest(req.id, { status: "approved" })}
+                   >
+                     Approve
+                   </ActionBtn>
+                   <ActionBtn
+                     disabled={actionKey.startsWith(`${req.id}-`) || !canTransition(req.status, "in_progress")}
+                     onClick={() => updateRequest(req.id, { status: "in_progress" })}
+                   >
+                     Start
+                   </ActionBtn>
+                   <ActionBtn
+                     disabled={actionKey.startsWith(`${req.id}-`) || !canTransition(req.status, "completed")}
+                     onClick={() => updateRequest(req.id, { status: "completed" })}
+                   >
+                     Complete
+                   </ActionBtn>
                   <ActionBtn
                     variant="warn"
                     disabled={actionKey === `${req.id}-urgency` || req.urgency === "critical"}

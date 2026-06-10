@@ -66,7 +66,6 @@ router.get("/requests/matches", async (req, res) => {
       : compatibleRequests;
   const filters: string[] = [
     "r.status = 'approved'",
-    "r.assigned_donor_id IS NULL",
     `r.blood_type = ANY($1)`,
     `r.location ILIKE $2`,
   ];
@@ -124,6 +123,36 @@ router.post("/requests/:id/respond", async (req, res) => {
     return res.status(409).json({ message: "Mark yourself available before accepting requests" });
   }
 
+  // First check if this is a direct request
+  const tableCheck = await pool.query(`
+    SELECT EXISTS (
+      SELECT FROM information_schema.tables 
+      WHERE table_name = 'direct_requests'
+    )
+  `);
+
+  if (tableCheck.rows[0].exists) {
+    const directResult = await pool.query(
+      `UPDATE direct_requests 
+       SET status = 'in_progress'
+       WHERE id = $1 AND status = 'pending' AND donor_id = $2
+       RETURNING *`,
+      [id, req.user!.id]
+    );
+
+    if (directResult.rowCount) {
+      const request = directResult.rows[0];
+      notifyDashboard([`user:${request.requester_id}`], {
+        title: "Request accepted",
+        message: `Donor has accepted your direct request`,
+        type: "request",
+        requestId: id
+      });
+      return res.json(request);
+    }
+  }
+
+  // Fallback to public request
   const compatibleRequests = getCompatibleRecipients(donor.blood_type);
   const updated = await pool.query(
     `UPDATE requests

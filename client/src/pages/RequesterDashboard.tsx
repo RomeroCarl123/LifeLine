@@ -106,6 +106,7 @@ export default function RequesterDashboard({ token }: Props) {
 
   useEffect(() => {
     load();
+    searchDonors();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -131,7 +132,7 @@ export default function RequesterDashboard({ token }: Props) {
     setIsSearchingDonors(true);
     try {
       const params = new URLSearchParams();
-      params.set("location", requesterLocation);
+      params.set("bloodType", form.bloodType);
       if (donorSearch.search) params.set("search", donorSearch.search);
       params.set("availableOnly", String(donorSearch.availableOnly));
 
@@ -326,6 +327,13 @@ export default function RequesterDashboard({ token }: Props) {
       {successMessage && (
         <div className="fixed top-6 right-6 z-50 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4 shadow-lg animate-in slide-in-from-right fade-in duration-300">
           <p className="text-sm font-medium text-emerald-800">{successMessage}</p>
+        </div>
+      )}
+
+      {/* Error notification */}
+      {error && (
+        <div className="fixed top-6 right-6 z-50 rounded-xl border border-red-200 bg-red-50 px-5 py-4 shadow-lg animate-in slide-in-from-right fade-in duration-300">
+          <p className="text-sm font-medium text-red-800">{error}</p>
         </div>
       )}
 

@@ -78,9 +78,23 @@ CREATE TABLE IF NOT EXISTS direct_requests (
   request_date DATE NOT NULL,
   request_time TIME NOT NULL,
   note TEXT,
+  blood_type TEXT,
+  urgency urgency_level DEFAULT 'normal',
   status request_status DEFAULT 'pending',
   created_at TIMESTAMP DEFAULT NOW()
 );
+
+CREATE TABLE IF NOT EXISTS donation_schedules (
+  id SERIAL PRIMARY KEY,
+  direct_request_id INT NOT NULL REFERENCES direct_requests(id) ON DELETE CASCADE,
+  hospital_name TEXT NOT NULL,
+  schedule_date DATE NOT NULL,
+  schedule_time TIME NOT NULL,
+  notes TEXT,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_donation_schedules_request ON donation_schedules(direct_request_id);
 
 CREATE INDEX IF NOT EXISTS idx_direct_requests_donor ON direct_requests(donor_id);
 CREATE INDEX IF NOT EXISTS idx_direct_requests_requester ON direct_requests(requester_id);
