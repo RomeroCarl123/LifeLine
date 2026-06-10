@@ -69,3 +69,18 @@ CREATE TABLE IF NOT EXISTS requests (
 CREATE INDEX IF NOT EXISTS idx_requests_status ON requests(status);
 CREATE INDEX IF NOT EXISTS idx_requests_urgency ON requests(urgency);
 CREATE INDEX IF NOT EXISTS idx_donors_blood_location ON donors(blood_type, location);
+
+CREATE TABLE IF NOT EXISTS direct_requests (
+  id SERIAL PRIMARY KEY,
+  requester_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  donor_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  units INT NOT NULL,
+  request_date DATE NOT NULL,
+  request_time TIME NOT NULL,
+  note TEXT,
+  status request_status DEFAULT 'pending',
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_direct_requests_donor ON direct_requests(donor_id);
+CREATE INDEX IF NOT EXISTS idx_direct_requests_requester ON direct_requests(requester_id);

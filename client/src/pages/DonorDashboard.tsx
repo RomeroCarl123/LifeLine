@@ -46,13 +46,14 @@ export default function DonorDashboard({ token }: Props) {
   const load = async (showRefresh = false) => {
     if (showRefresh) setIsRefreshing(true);
 
-    const [profileData, matchData] = await Promise.all([
+    const [profileData, matchData, directRequests] = await Promise.all([
       api("/donors/me", {}, token),
       api<{ requests: any[] }>(`/donors/requests/matches`, {}, token),
+      api<any[]>(`/requests/donors/requests`, {}, token),
     ]);
 
     setProfile(profileData);
-    setMatches(matchData.requests);
+    setMatches([...directRequests, ...matchData.requests]);
     setIsLoading(false);
     setIsRefreshing(false);
   };

@@ -39,15 +39,23 @@ export default function RequesterDashboard({ token }: Props) {
   const [isFiltering, setIsFiltering] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [isSearchingDonors, setIsSearchingDonors] = useState(false);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isSendingRequest, setIsSendingRequest] = useState(false);
 
   const [donorSearch, setDonorSearch] = useState({
-    bloodType: "O+",
-    location: DEFAULT_LOCATION,
     search: "",
     availableOnly: true,
   });
 
   const [donors, setDonors] = useState<any[]>([]);
+  const [selectedDonor, setSelectedDonor] = useState<any>(null);
+  const [requestForm, setRequestForm] = useState({
+    units: 1,
+    date: new Date().toISOString().split('T')[0],
+    time: "12:00",
+    note: ""
+  });
 
   const criticalRequests = useMemo(
     () => requests.filter((r) => r.urgency === "critical").length,
@@ -69,10 +77,7 @@ export default function RequesterDashboard({ token }: Props) {
     () => donors.filter((d) => d.availability).length,
     [donors],
   );
-  const requesterLocation = useMemo(
-    () => donorSearch.location || DEFAULT_LOCATION,
-    [donorSearch.location],
-  );
+  const requesterLocation = "Valencia City, Bukidnon";
   const nearbyDonors = useMemo(
     () => donors.filter((donor) => donor.availability).slice(0, 4),
     [donors],
@@ -126,7 +131,6 @@ export default function RequesterDashboard({ token }: Props) {
     setIsSearchingDonors(true);
     try {
       const params = new URLSearchParams();
-      if (donorSearch.bloodType) params.set("bloodType", donorSearch.bloodType);
       params.set("location", requesterLocation);
       if (donorSearch.search) params.set("search", donorSearch.search);
       params.set("availableOnly", String(donorSearch.availableOnly));
@@ -139,6 +143,32 @@ export default function RequesterDashboard({ token }: Props) {
       setDonors(result);
     } finally {
       setIsSearchingDonors(false);
+    }
+  };
+
+  const sendDonorRequest = async () => {
+    if (!selectedDonor) return;
+    setIsSendingRequest(true);
+    try {
+      await api(`/requests/donors/${selectedDonor.id}/request`, {
+        method: "POST",
+        body: JSON.stringify(requestForm)
+      }, token);
+      
+      setSelectedDonor(null);
+      setRequestForm({
+        units: 1,
+        date: new Date().toISOString().split('T')[0],
+        time: "12:00",
+        note: ""
+      });
+      setSuccessMessage(`✓ Request successfully sent to ${selectedDonor.name}`);
+      setTimeout(() => setSuccessMessage(""), 5000);
+      await load();
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setIsSendingRequest(false);
     }
   };
 
@@ -292,6 +322,13 @@ export default function RequesterDashboard({ token }: Props) {
         </div>
       </div>
 
+      {/* Success notification */}
+      {successMessage && (
+        <div className="fixed top-6 right-6 z-50 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4 shadow-lg animate-in slide-in-from-right fade-in duration-300">
+          <p className="text-sm font-medium text-emerald-800">{successMessage}</p>
+        </div>
+      )}
+
       {/* DONOR SEARCH */}
       <section className={`${card} overflow-hidden`}>
         <header className="flex flex-wrap items-end justify-between gap-4 px-6 sm:px-8 py-6 border-b border-[var(--ll-line)]">
@@ -399,16 +436,6 @@ export default function RequesterDashboard({ token }: Props) {
           <aside className={`${card} p-5 space-y-5 h-fit bg-[var(--ll-bg)]`}>
             <p className={eyebrow}>Filters</p>
 
-            <Field label="Blood type">
-              <input
-                className={inputCls}
-                value={donorSearch.bloodType}
-                onChange={(e) =>
-                  setDonorSearch({ ...donorSearch, bloodType: e.target.value })
-                }
-              />
-            </Field>
-
             <Field label="Search area">
               <input
                 className={`${inputCls} bg-[var(--ll-surface)]`}
@@ -466,12 +493,13 @@ export default function RequesterDashboard({ token }: Props) {
           </aside>
 
           <div className="space-y-3">
-            {donors.map((d, i) => (
-              <article
-                key={d.id}
-                className={`${card} grid gap-4 px-5 py-4 lg:grid-cols-[1.3fr_1fr_auto] lg:items-center hover:border-[var(--ll-ink)]/20 transition`}
-                style={{ animationDelay: `${i * 40}ms` }}
-              >
+              {donors.map((d, i) => (
+                <article
+                  key={d.id}
+                  onClick={() => d.availability && setSelectedDonor(d)}
+                  className={`${card} grid gap-4 px-5 py-4 lg:grid-cols-[1.3fr_1fr_auto] lg:items-center hover:border-[var(--ll-ink)]/20 transition ${d.availability ? 'cursor-pointer hover:shadow-md' : 'opacity-70'}`}
+                  style={{ animationDelay: `${i * 40}ms` }}
+                >
                 <div>
                   <p className="text-base font-semibold">{d.name}</p>
                   <p className="text-sm text-[var(--ll-muted)]">{d.email}</p>
@@ -697,6 +725,91 @@ export default function RequesterDashboard({ token }: Props) {
           </div>
         </div>
       </section>
+      {/* Donor Request Modal */}
+      {selectedDonor && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setSelectedDonor(null)}>
+          <div className={`${card} max-w-md w-full p-6`} onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <p className={eyebrow}>Request blood</p>
+                <h3 className="text-xl font-semibold mt-1">Request from {selectedDonor.name}</h3>
+              </div>
+              <button onClick={() => setSelectedDonor(null)} className="text-[var(--ll-muted)] hover:text-[var(--ll-ink)] p-2">
+                ✕
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 p-3 bg-[var(--ll-bg)] rounded-xl">
+                <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 ring-1 ring-emerald-200">
+                  {selectedDonor.blood_type}
+                </span>
+                <span className="text-sm text-[var(--ll-muted)]">{selectedDonor.location}</span>
+              </div>
+
+              <Field label="Units required">
+                <input
+                  type="number"
+                  min="1"
+                  max="10"
+                  className={inputCls}
+                  value={requestForm.units}
+                  onChange={(e) => setRequestForm({...requestForm, units: parseInt(e.target.value) || 1})}
+                />
+              </Field>
+
+              <div className="grid grid-cols-2 gap-3">
+                <Field label="Date">
+                  <input
+                    type="date"
+                    className={inputCls}
+                    value={requestForm.date}
+                    onChange={(e) => setRequestForm({...requestForm, date: e.target.value})}
+                  />
+                </Field>
+                <Field label="Time">
+                  <input
+                    type="time"
+                    className={inputCls}
+                    value={requestForm.time}
+                    onChange={(e) => setRequestForm({...requestForm, time: e.target.value})}
+                  />
+                </Field>
+              </div>
+
+              <Field label="Note (optional)">
+                <textarea
+                  className={inputCls}
+                  rows={2}
+                  placeholder="Additional information for donor..."
+                  value={requestForm.note}
+                  onChange={(e) => setRequestForm({...requestForm, note: e.target.value})}
+                />
+              </Field>
+
+              <div className="flex gap-3 pt-2">
+                <button
+                  onClick={() => setSelectedDonor(null)}
+                  className="flex-1 rounded-lg border border-[var(--ll-line)] px-4 py-3 text-sm font-medium hover:bg-[var(--ll-surface)] transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={sendDonorRequest}
+                  disabled={isSendingRequest}
+                  className="flex-1 rounded-lg bg-[var(--ll-accent)] px-4 py-3 text-sm font-medium text-white hover:opacity-90 transition disabled:opacity-60"
+                >
+                  {isSendingRequest ? (
+                    <span className="inline-flex items-center justify-center gap-2">
+                      <Spinner /> Sending…
+                    </span>
+                  ) : "Send request →"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

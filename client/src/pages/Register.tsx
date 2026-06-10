@@ -20,8 +20,6 @@ export default function Register({ onAuth }: Props) {
     email: "",
     password: "",
     bloodType: "O+",
-    // Defaulted as requested:
-    // Valencia City, Bukidnon
     location: "Valencia City, Bukidnon",
     availability: true,
   });
@@ -55,6 +53,11 @@ export default function Register({ onAuth }: Props) {
         password: form.password,
         role,
       };
+
+      if (role === "requester") {
+        payload.bloodType = form.bloodType;
+        payload.location = form.location;
+      }
 
       if (role === "donor") {
         payload.bloodType = form.bloodType;
@@ -109,8 +112,8 @@ export default function Register({ onAuth }: Props) {
             </div>
 
             {/* Role toggle */}
-            <div className="mt-6 grid grid-cols-3 gap-2 rounded-xl border border-[var(--ll-line,#e2e8f0)] bg-white p-1.5">
-              {(["donor", "requester", "admin"] as Role[]).map((r) => (
+            <div className="mt-6 grid grid-cols-2 gap-2 rounded-xl border border-[var(--ll-line,#e2e8f0)] bg-white p-1.5">
+              {(["donor", "requester"] as Role[]).map((r) => (
                 <button
                   key={r}
                   type="button"
@@ -190,7 +193,7 @@ export default function Register({ onAuth }: Props) {
                 </p>
               </Field>
 
-              {role === "donor" && (
+              {(role === "donor" || role === "requester") && (
                 <div className="space-y-3">
                   <div className="grid grid-cols-2 gap-3">
                     <Field label="Blood type">
@@ -224,27 +227,29 @@ export default function Register({ onAuth }: Props) {
                     </Field>
                   </div>
 
-                  {/* Availability option */}
-                  <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-[var(--ll-line,#e2e8f0)] bg-white px-4 py-3">
-                    <input
-                      type="checkbox"
-                      checked={form.availability}
-                      onChange={(e) =>
-                        setForm({ ...form, availability: e.target.checked })
-                      }
-                      className="mt-1 h-4 w-4 accent-[var(--ll-accent,#ef4444)]"
-                    />
-                    <span>
-                      <span className="block text-xs font-bold uppercase tracking-[0.16em] text-[var(--ll-muted,#64748b)]">
-                        I’m available
+                  {/* Availability option - only for donors */}
+                  {role === "donor" && (
+                    <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-[var(--ll-line,#e2e8f0)] bg-white px-4 py-3">
+                      <input
+                        type="checkbox"
+                        checked={form.availability}
+                        onChange={(e) =>
+                          setForm({ ...form, availability: e.target.checked })
+                        }
+                        className="mt-1 h-4 w-4 accent-[var(--ll-accent,#ef4444)]"
+                      />
+                      <span>
+                        <span className="block text-xs font-bold uppercase tracking-[0.16em] text-[var(--ll-muted,#64748b)]">
+                          I’m available
+                        </span>
+                        <span className="mt-1 block text-sm text-[var(--ll-ink,#0f172a)]">
+                          {form.availability
+                            ? "You’ll be shown as available to donate."
+                            : "You’ll be registered, but not shown as available yet."}
+                        </span>
                       </span>
-                      <span className="mt-1 block text-sm text-[var(--ll-ink,#0f172a)]">
-                        {form.availability
-                          ? "You’ll be shown as available to donate."
-                          : "You’ll be registered, but not shown as available yet."}
-                      </span>
-                    </span>
-                  </label>
+                    </label>
+                  )}
                 </div>
               )}
 
