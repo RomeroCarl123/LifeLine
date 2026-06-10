@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api } from "../api";
 
 type Props = { token: string };
@@ -40,29 +40,15 @@ export default function DonorDashboard({ token }: Props) {
   const [isToggling, setIsToggling] = useState(false);
   const [acceptingId, setAcceptingId] = useState<number | null>(null);
 
-  const [matchFilter, setMatchFilter] = useState({
-    bloodType: "",
-    location: "",
-    urgency: "",
-    search: "",
-  });
+  // Requests you can respond to are already matched by blood type + location on the backend.
+  // So we don't need any donor-side filters here.
 
   const load = async (showRefresh = false) => {
     if (showRefresh) setIsRefreshing(true);
 
-    const params = new URLSearchParams();
-    if (matchFilter.bloodType) params.set("bloodType", matchFilter.bloodType);
-    if (matchFilter.location) params.set("location", matchFilter.location);
-    if (matchFilter.urgency) params.set("urgency", matchFilter.urgency);
-    if (matchFilter.search) params.set("search", matchFilter.search);
-
     const [profileData, matchData] = await Promise.all([
       api("/donors/me", {}, token),
-      api<{ requests: any[] }>(
-        `/donors/requests/matches?${params.toString()}`,
-        {},
-        token,
-      ),
+      api<{ requests: any[] }>(`/donors/requests/matches`, {}, token),
     ]);
 
     setProfile(profileData);
@@ -307,45 +293,11 @@ export default function DonorDashboard({ token }: Props) {
             </div>
           )}
 
-          {/* Filter rail */}
-          <div className="grid gap-3 border-b border-slate-200 bg-slate-50/60 p-6 sm:p-8 md:grid-cols-[1fr_1fr_180px_1.4fr_auto]">
-            <FilterInput
-              placeholder="Blood type"
-              value={matchFilter.bloodType}
-              onChange={(v) => setMatchFilter({ ...matchFilter, bloodType: v })}
-            />
-            <FilterInput
-              placeholder="Location"
-              value={matchFilter.location}
-              onChange={(v) => setMatchFilter({ ...matchFilter, location: v })}
-            />
-
-            <select
-              className="h-11 rounded-xl border border-slate-300 bg-white px-3 text-sm font-medium text-slate-900 focus:border-[var(--ll-accent,#ef4444)] focus:outline-none focus:ring-2 focus:ring-red-100"
-              value={matchFilter.urgency}
-              onChange={(e) =>
-                setMatchFilter({ ...matchFilter, urgency: e.target.value })
-              }
-            >
-              <option value="">All urgency</option>
-              <option value="normal">Normal</option>
-              <option value="urgent">Urgent</option>
-              <option value="critical">Critical</option>
-            </select>
-
-            <FilterInput
-              placeholder="Search hospital or contact"
-              value={matchFilter.search}
-              onChange={(v) => setMatchFilter({ ...matchFilter, search: v })}
-            />
-
-            <button
-              className="h-11 rounded-xl bg-[var(--ll-ink,#0f172a)] px-5 text-sm font-bold text-white transition hover:bg-[var(--ll-accent,#ef4444)] disabled:opacity-60"
-              onClick={() => load(true)}
-              disabled={isRefreshing}
-            >
-              {isRefreshing ? <span className="loading-spinner" /> : "Apply"}
-            </button>
+          {/* Filter rail removed: requests are returned already matching the donor's blood type + location. */}
+          <div className="grid gap-3 border-b border-slate-200 bg-slate-50/60 p-6 sm:p-8">
+            <div className="text-sm font-semibold text-slate-700">
+              Showing requests matched to your blood type.
+            </div>
           </div>
 
           {/* Cards */}

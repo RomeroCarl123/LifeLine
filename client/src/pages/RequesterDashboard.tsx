@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { api } from "../api";
-import LocationMap from "../components/LocationMap";
+import { DEFAULT_LOCATION } from "../constants/location";
 
 type Props = { token: string };
 
@@ -30,7 +30,7 @@ export default function RequesterDashboard({ token }: Props) {
     bloodType: "O+",
     units: 1,
     urgency: "normal",
-    location: "",
+    location: DEFAULT_LOCATION,
     hospital: "",
     contact: "",
   });
@@ -42,7 +42,7 @@ export default function RequesterDashboard({ token }: Props) {
 
   const [donorSearch, setDonorSearch] = useState({
     bloodType: "O+",
-    location: "",
+    location: DEFAULT_LOCATION,
     search: "",
     availableOnly: true,
   });
@@ -67,6 +67,14 @@ export default function RequesterDashboard({ token }: Props) {
   );
   const availableDonorResults = useMemo(
     () => donors.filter((d) => d.availability).length,
+    [donors],
+  );
+  const requesterLocation = useMemo(
+    () => donorSearch.location || DEFAULT_LOCATION,
+    [donorSearch.location],
+  );
+  const nearbyDonors = useMemo(
+    () => donors.filter((donor) => donor.availability).slice(0, 4),
     [donors],
   );
 
@@ -119,7 +127,7 @@ export default function RequesterDashboard({ token }: Props) {
     try {
       const params = new URLSearchParams();
       if (donorSearch.bloodType) params.set("bloodType", donorSearch.bloodType);
-      if (donorSearch.location) params.set("location", donorSearch.location);
+      params.set("location", requesterLocation);
       if (donorSearch.search) params.set("search", donorSearch.search);
       params.set("availableOnly", String(donorSearch.availableOnly));
 
@@ -315,16 +323,60 @@ export default function RequesterDashboard({ token }: Props) {
         <div className="bg-[var(--ll-surface)] p-6 sm:p-8">
           <div className="overflow-hidden rounded-xl border border-[var(--ll-line)] bg-white">
             <div className="flex items-center justify-between gap-3 px-5 py-3 border-b border-[var(--ll-line)]">
-              <p className="text-sm font-medium">Live map</p>
+              <p className="text-sm font-medium">Nearby donor data</p>
               <div className="flex gap-2">
-                <Chip>{donorSearch.location || "No area set"}</Chip>
+                <Chip>{requesterLocation || "No requester area yet"}</Chip>
                 <Chip>
                   {donorSearch.availableOnly ? "Available only" : "All donors"}
                 </Chip>
               </div>
             </div>
-            <div className="min-h-[420px]">
-              <LocationMap location={donorSearch.location} />
+            <div className="grid gap-px bg-[var(--ll-line)] md:grid-cols-[0.9fr_1.1fr]">
+              <div className="bg-white p-5 sm:p-6">
+                <p className={eyebrow}>Requester area</p>
+                <h4
+                  className="mt-2 text-2xl font-semibold tracking-tight"
+                  style={{ fontFamily: "Urbanist" }}
+                >
+                  {requesterLocation || "Add a request location"}
+                </h4>
+                <p className="mt-3 text-sm leading-6 text-[var(--ll-muted)]">
+                  Donor matches are filtered by Valencia City, Bukidnon, then
+                  by blood type and availability.
+                </p>
+                <div className="mt-6 grid grid-cols-2 gap-3">
+                  <MiniStat label="Matches" value={donors.length} />
+                  <MiniStat label="Available" value={availableDonorResults} accent />
+                </div>
+              </div>
+
+              <div className="bg-white p-5 sm:p-6">
+                <p className={eyebrow}>Closest matches</p>
+                <div className="mt-4 space-y-3">
+                  {nearbyDonors.map((donor) => (
+                    <div
+                      key={donor.id}
+                      className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[var(--ll-line)] bg-[var(--ll-bg)] px-4 py-3"
+                    >
+                      <div>
+                        <p className="text-sm font-semibold">{donor.name}</p>
+                        <p className="text-xs text-[var(--ll-muted)]">
+                          {donor.location || "No location"} - {donor.email}
+                        </p>
+                      </div>
+                      <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 ring-1 ring-emerald-200">
+                        {donor.blood_type}
+                      </span>
+                    </div>
+                  ))}
+
+                  {nearbyDonors.length === 0 && (
+                    <div className="rounded-xl border border-dashed border-[var(--ll-line)] bg-[var(--ll-bg)] p-5 text-sm text-[var(--ll-muted)]">
+                      Run a donor search to show available donors near the requester location.
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -338,7 +390,7 @@ export default function RequesterDashboard({ token }: Props) {
           />
           <StripStat
             label="Search area"
-            value={donorSearch.location || "—"}
+            value={requesterLocation || "—"}
             text
           />
         </div>
@@ -359,12 +411,9 @@ export default function RequesterDashboard({ token }: Props) {
 
             <Field label="Search area">
               <input
-                className={inputCls}
-                placeholder="City or hospital"
-                value={donorSearch.location}
-                onChange={(e) =>
-                  setDonorSearch({ ...donorSearch, location: e.target.value })
-                }
+                className={`${inputCls} bg-[var(--ll-surface)]`}
+                value={requesterLocation}
+                readOnly
               />
             </Field>
 
@@ -693,6 +742,32 @@ function Stat({
       </p>
       <p
         className={`mt-1 text-3xl font-semibold tracking-tight ${accent ? "text-[var(--ll-accent)]" : ""}`}
+        style={{ fontFamily: "Urbanist" }}
+      >
+        {value}
+      </p>
+    </div>
+  );
+}
+
+function MiniStat({
+  label,
+  value,
+  accent,
+}: {
+  label: string;
+  value: React.ReactNode;
+  accent?: boolean;
+}) {
+  return (
+    <div className="rounded-xl border border-[var(--ll-line)] bg-[var(--ll-bg)] px-4 py-3">
+      <p className="text-xs uppercase tracking-wider text-[var(--ll-muted)]">
+        {label}
+      </p>
+      <p
+        className={`mt-1 text-2xl font-semibold tracking-tight ${
+          accent ? "text-[var(--ll-accent)]" : ""
+        }`}
         style={{ fontFamily: "Urbanist" }}
       >
         {value}

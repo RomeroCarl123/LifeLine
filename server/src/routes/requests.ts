@@ -6,6 +6,8 @@ import { getCompatibleDonors } from "../utils/bloodCompat.js";
 import { notifyDashboard } from "../realtime.js";
 
 const router = express.Router();
+const DONOR_SEARCH_CITY = "Valencia";
+const DONOR_SEARCH_PROVINCE = "Bukidnon";
 
 const bloodTypes = ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"] as const;
 const textField = (label: string, max = 120) =>
@@ -87,7 +89,7 @@ router.get("/", authRequired, async (req, res) => {
 });
 
 router.get("/donors/search", authRequired, requireRole(["requester"]), async (req, res) => {
-  const { bloodType, location, search, availableOnly = "true" } = req.query;
+  const { bloodType, search, availableOnly = "true" } = req.query;
   const filters: string[] = [];
   const values: unknown[] = [];
 
@@ -96,10 +98,10 @@ router.get("/donors/search", authRequired, requireRole(["requester"]), async (re
     filters.push(`d.blood_type = $${values.length}`);
   }
 
-  if (location) {
-    values.push(`%${String(location)}%`);
-    filters.push(`d.location ILIKE $${values.length}`);
-  }
+  values.push(`%${DONOR_SEARCH_CITY}%`);
+  filters.push(`d.location ILIKE $${values.length}`);
+  values.push(`%${DONOR_SEARCH_PROVINCE}%`);
+  filters.push(`d.location ILIKE $${values.length}`);
 
   if (search) {
     values.push(`%${String(search)}%`);

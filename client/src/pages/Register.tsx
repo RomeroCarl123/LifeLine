@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { api, Role } from "../api";
+import { DEFAULT_LOCATION } from "../constants/location";
 
 type Props = { onAuth: (token: string, user: any) => void };
 
@@ -19,9 +20,12 @@ export default function Register({ onAuth }: Props) {
     email: "",
     password: "",
     bloodType: "O+",
-    location: "",
+    // Defaulted as requested:
+    // Valencia City, Bukidnon
+    location: "Valencia City, Bukidnon",
     availability: true,
   });
+
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,7 +36,12 @@ export default function Register({ onAuth }: Props) {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const requested = params.get("role");
-    if (requested === "donor" || requested === "requester" || requested === "admin") setRole(requested);
+    if (
+      requested === "donor" ||
+      requested === "requester" ||
+      requested === "admin"
+    )
+      setRole(requested);
   }, [location.search]);
 
   const submit = async (e: FormEvent) => {
@@ -112,7 +121,11 @@ export default function Register({ onAuth }: Props) {
                       : "text-[var(--ll-muted,#64748b)] hover:bg-white"
                   }`}
                 >
-                  {r === "donor" ? "I'm a donor" : r === "requester" ? "I need blood" : "Admin"}
+                  {r === "donor"
+                    ? "I'm a donor"
+                    : r === "requester"
+                      ? "I need blood"
+                      : "Admin"}
                 </button>
               ))}
             </div>
@@ -206,7 +219,7 @@ export default function Register({ onAuth }: Props) {
                         maxLength={120}
                         pattern="[A-Za-z0-9\s,.'-]+"
                         className="auth-input"
-                        placeholder="City, area"
+                        placeholder={DEFAULT_LOCATION}
                       />
                     </Field>
                   </div>
